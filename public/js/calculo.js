@@ -1,27 +1,25 @@
 export function calcularGanancia() {
-  let totalGasto = 0;
-  
+  let gasto = 0; // Reiniciamos el gasto
+
   // Obtener la cantidad de objetos a fabricar
   const cantidadFabricarInput = document.getElementById("cantidadFabricar");
   const cantidadFabricar = cantidadFabricarInput ? parseInt(cantidadFabricarInput.value) || 1 : 1;
-  
+
   console.log(`[DEBUG] Cantidad a fabricar: ${cantidadFabricar}`);
 
-  // Verificar que la sección de ingredientes existe antes de acceder a sus datos
+  // Obtener los ingredientes desde el dataset
   const ingredientesElement = document.getElementById("ingredientes");
   if (!ingredientesElement || !ingredientesElement.dataset.ingredientes) {
     console.warn("[WARNING] No se encontraron ingredientes en el dataset.");
     return;
   }
 
-  // Obtener los ingredientes desde el dataset
   const ingredientes = JSON.parse(ingredientesElement.dataset.ingredientes || "[]");
   console.log("[DEBUG] Ingredientes cargados:", ingredientes);
 
   let ingredientesTotalesHTML = "";
 
   ingredientes.forEach(ingrediente => {
-    // Verificar si el input de precio del ingrediente existe
     const inputPrecio = document.getElementById(`precio-${ingrediente.id}`);
     
     if (!inputPrecio) {
@@ -33,8 +31,9 @@ export function calcularGanancia() {
     const precioUnitario = parseFloat(inputPrecio.value) || 0;
     console.log(`[DEBUG] Precio de ${ingrediente.name}: ${precioUnitario} K`);
 
-    // Calcular el costo total del ingrediente
-    totalGasto += precioUnitario * ingrediente.quantity;
+    // 🔥 Calcular el costo total del ingrediente (precio unitario * cantidad requerida)
+    const costoIngrediente = precioUnitario * ingrediente.quantity;
+    gasto += costoIngrediente; // Sumar al gasto total de la receta
 
     // Calcular cantidad total de ingredientes requeridos según la cantidad a fabricar
     const cantidadTotal = ingrediente.quantity * cantidadFabricar;
@@ -46,29 +45,49 @@ export function calcularGanancia() {
     `;
   });
 
+  // 🔥 Calcular el Gasto Total multiplicando el gasto base por la cantidad a fabricar
+  const gastoTotal = gasto * cantidadFabricar;
+
   // Verificar si el input del precio del objeto existe antes de obtener su valor
   const precioObjetoInput = document.getElementById("precioObjeto");
   const precioObjeto = precioObjetoInput ? parseFloat(precioObjetoInput.value) || 0 : 0;
-  
+
   console.log("[DEBUG] Precio del objeto:", precioObjeto);
 
   // Calcular la ganancia correctamente
-  const ganancia = (precioObjeto * cantidadFabricar) - totalGasto;
-  const gananciaTotal = ganancia; // Ya se multiplica arriba por la cantidad a fabricar
+  const ganancia = (precioObjeto * cantidadFabricar) - gastoTotal;
 
-  // Actualizar los valores en la interfaz
-  const totalGastoElement = document.getElementById("totalGasto");
-  if (totalGastoElement) totalGastoElement.textContent = totalGasto + " K";
+  // ✅ Actualizar el Gasto en la sección verde
+  const gastoElement = document.getElementById("gasto");
+  if (gastoElement) gastoElement.textContent = `${gasto} K`; // 🔥 Ahora el gasto aparece correctamente en verde
 
+  // ✅ Actualizar la Ganancia en la sección verde
   const gananciaElement = document.getElementById("ganancia");
-  if (gananciaElement) gananciaElement.textContent = ganancia + " K";
+  if (gananciaElement) gananciaElement.textContent = `${ganancia} K`;
 
+  // ✅ Actualizar la Ganancia Total en la sección azul
   const gananciaTotalElement = document.getElementById("gananciaTotal");
-  if (gananciaTotalElement) gananciaTotalElement.textContent = gananciaTotal + " K";
+  if (gananciaTotalElement) gananciaTotalElement.textContent = `${ganancia} K`;
 
+  // ✅ Restaurar la actualización de "Gasto Total" en la sección azul
+  let gastoTotalElement = document.getElementById("gastoTotal");
+  if (!gastoTotalElement) {
+    const calculationDetails = document.getElementById("calculationDetails");
+    gastoTotalElement = document.createElement("h3");
+    gastoTotalElement.id = "gastoTotal";
+    calculationDetails.appendChild(gastoTotalElement);
+  }
+  gastoTotalElement.textContent = `Gasto Total: ${gastoTotal} K`;
+
+  // Actualizar la lista de ingredientes totales necesarios
   const ingredientesTotalesElement = document.getElementById("ingredientesTotales");
   if (ingredientesTotalesElement) ingredientesTotalesElement.innerHTML = ingredientesTotalesHTML;
 
-  console.log("[DEBUG] Cálculo completado: Gasto total:", totalGasto, "K | Ganancia:", ganancia, "K | Ganancia Total:", gananciaTotal, "K");
+  console.log("[DEBUG] Cálculo completado:");
+  console.log(` - Gasto: ${gasto} K`);
+  console.log(` - Gasto Total: ${gastoTotal} K`);
+  console.log(` - Ganancia: ${ganancia} K`);
 }
-window.calcularGanancia = calcularGanancia; 
+
+// Asegurar que la función sea accesible globalmente
+window.calcularGanancia = calcularGanancia;

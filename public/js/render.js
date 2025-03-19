@@ -31,9 +31,13 @@ export const renderRecipe = (recipe) => {
   }).join("");
 };
 
-// Función para asignar eventos de cálculo a los inputs después de renderizar la receta
+// ✅ Función mejorada para asignar eventos de cálculo a los inputs después de renderizar la receta
 export function asignarEventosCalculo() {
   document.querySelectorAll(".price-input").forEach(input => {
-    input.addEventListener("input", calcularGanancia);
+    input.removeEventListener("input", calcularGanancia); // 🔥 Evita eventos duplicados
+    input.addEventListener("input", () => {
+      console.log(`[DEBUG] Evento disparado en: ${input.id}`);
+      calcularGanancia();
+    });
   });
 }

@@ -18,20 +18,38 @@
   </form>
 
   <!-- Contenedor principal -->
-  <main>
-    <!-- Contenedor de resultados principales -->
-    <section id="results">Introduce un nombre para buscar.</section>
+  <main class="container">
+    <!-- Contenedor de resumen de la receta -->
+    <section id="recipeSummary" class="section scale-up-horizontal-center">
 
-    <!-- Contenedor de detalles de la receta -->
-    <section id="recipeDetails">
       <h2 id="nombreObjeto"></h2>
-    </section> 
-    </main> 
-    
+      <h3>Precio de Venta:</h3>
+      <input type="number" id="precioObjeto" class="price-input" placeholder="Ingrese precio" oninput="calcularGanancia()">
+      
+      <h3>Receta:</h3>
+      <ul id="ingredientes"></ul>
+
+      <h3>Gasto: <span id="gasto">0</span> K</h3>
+
+      <h3>Ganancia: <span id="ganancia">0</span> K</h3>
+    </section>
+
+    <!-- Contenedor de cálculos adicionales -->
+    <section id="calculationDetails" class="section scale-up-horizontal-center">
+      <h3>Cantidad a fabricar:</h3>
+      <input type="number" id="cantidadFabricar" value="1" min="1" class="price-input" oninput="calcularGanancia()">
+      
+      <h3>Ganancia Total: <span id="gananciaTotal">0</span> K</h3>
+      <h3>Gasto Total: <span id="gastoTotal">0</span> K</h3> <!-- 🔥 Nuevo -->
+
+      <h3>Ingredientes Totales Necesarios:</h3>
+      <ul id="ingredientesTotales"></ul>
+    </section>
+  </main>
+
   <script type="module" src="js/calculo.js"></script>
   <script type="module" src="js/search.js"></script>
   <script type="module" src="js/render.js"></script>
-  
 
 </body>
 </html>
