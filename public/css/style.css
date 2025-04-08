@@ -76,6 +76,7 @@ input, button {
 
 /* Contenedor principal que agrupa las secciones */
 .container {
+  flex-wrap: wrap;
   display: flex; /* Hace que las secciones estén una al lado de la otra */
   justify-content: space-between; /* Espaciado entre secciones */
   gap: 20px; /* Espacio entre ellas */
@@ -88,7 +89,8 @@ input, button {
   flex: 1; /* Hace que ambas secciones ocupen el mismo espacio */
   background-color: #fff;
   border: 4px solid #000000;
-  padding: 20px;
+  padding: 15px;
+  margin-bottom: 20px;
   border-radius: 20px;
   min-width: 250px; /* Evita que las secciones se encojan demasiado */
   text-align: center; /* Centra el contenido */
@@ -96,7 +98,8 @@ input, button {
 
 /* Ajustar tamaño de los inputs */
 input {
-  width: 25%;
+  width: 100%;
+  max-width: 300px;
   box-sizing: border-box;
   margin-bottom: 10px;
 }
@@ -132,6 +135,18 @@ input {
 /* Hacer responsive */
 @media (max-width: 768px) {
   .container {
-    flex-direction: column; /* En pantallas pequeñas, apila las secciones */
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .section {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  input {
+    width: 100%;
+    max-width: 100%;
   }
 }
