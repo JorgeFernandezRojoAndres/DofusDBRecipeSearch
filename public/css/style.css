@@ -69,10 +69,7 @@ form {
   text-align: center;
 }
 
-input, button {
-  padding: 10px;
-  margin-right: 10px;
-}
+
 
 /* Contenedor principal que agrupa las secciones */
 .container {
@@ -102,7 +99,12 @@ input {
   max-width: 300px;
   box-sizing: border-box;
   margin-bottom: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
+
+
 .scale-up-horizontal-center {
   animation: scale-up-horizontal-center 0.4s;
 }
@@ -145,8 +147,5 @@ input {
     padding: 15px;
     margin-bottom: 20px;
   }
-  input {
-    width: 100%;
-    max-width: 100%;
-  }
+  
 }
