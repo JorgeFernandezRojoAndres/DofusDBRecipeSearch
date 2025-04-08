@@ -4,6 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Búsqueda de Recetas - DofusDB</title>
+
+  <!-- SEO Básico -->
+  <meta name="description" content="Buscador de recetas de objetos de Dofus. Calcula tus ganancias de forma rápida y sencilla.">
+  <meta name="keywords" content="Dofus, recetas, objetos, kamas, búsqueda, economía, alquimia, herrero, crudo, oficio">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Jorge Fernández Rojo Andrés">
+  <link rel="canonical" href="https://recetasdofus.com.ar">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Búsqueda de Recetas - DofusDB">
+  <meta property="og:description" content="Calculá cuánto ganás al fabricar objetos en Dofus.">
+  <meta property="og:image" content="https://recetasdofus.com.ar/images/favicon.png">
+  <meta property="og:url" content="https://recetasdofus.com.ar">
+  <meta property="og:type" content="website">
+
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" href="images/favicon.png" type="image/png">
 
@@ -13,7 +28,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-GHSB8ZF8WD');
   </script>
 </head>
@@ -31,7 +45,6 @@
   <main class="container">
     <!-- Contenedor de resumen de la receta -->
     <section id="recipeSummary" class="section scale-up-horizontal-center">
-
       <h2 id="nombreObjeto"></h2>
       <h3>Precio de Venta:</h3>
       <input type="number" id="precioObjeto" class="price-input" placeholder="Ingrese precio" oninput="calcularGanancia()">
@@ -40,7 +53,6 @@
       <ul id="ingredientes"></ul>
 
       <h3>Gasto: <span id="gasto">0</span> K</h3>
-
       <h3>Ganancia: <span id="ganancia">0</span> K</h3>
     </section>
 
@@ -50,7 +62,7 @@
       <input type="number" id="cantidadFabricar" value="1" min="1" class="price-input" oninput="calcularGanancia()">
       
       <h3>Ganancia Total: <span id="gananciaTotal">0</span> K</h3>
-      <h3>Gasto Total: <span id="gastoTotal">0</span> K</h3> <!-- 🔥 Nuevo -->
+      <h3>Gasto Total: <span id="gastoTotal">0</span> K</h3>
 
       <h3>Ingredientes Totales Necesarios:</h3>
       <ul id="ingredientesTotales"></ul>
