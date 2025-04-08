@@ -25,3 +25,29 @@ DofusDB Recipe Search es una herramienta web para buscar recetas de objetos en *
    ```sh
    git clone https://github.com/tu-usuario/dofusdb-recipe-search.git
    cd dofusdb-recipe-search
+2.Instalá las dependencias y ejecutá el servidor:   
+   npm install
+   npm start
+3.Accedé a http://localhost:3000 para usar la app localmente. 
+🔗 Producción
+Sitio en vivo: 👉 https://recetasdofus.com.ar
+📁 Estructura del proyecto
+public/
+├── css/
+├── images/
+├── js/
+├── index.html
+├── sitemap.xml
+└── robots.txt
+
+src/
+├── controllers/
+├── routes/
+├── utils/
+└── views/
+👤 Autor
+Jorge Fernández Rojo Andrés
+Estudiante de Ingeniería de Software | Desarrollador Full Stack
+🔗 https://www.linkedin.com/in/jorgeandresfernandezrojo/
+📬 Si querés colaborar o reportar errores, abrí un issue o pull request. ¡Toda ayuda es bienvenida!
+
