@@ -149,3 +149,10 @@ input {
   }
   
 }
+footer img {
+  transition: transform 0.3s ease;
+}
+
+footer img:hover {
+  transform: scale(1.1);
+}
