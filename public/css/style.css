@@ -156,3 +156,19 @@ footer img {
 footer img:hover {
   transform: scale(1.1);
 }
+/* Estilo personalizado para modal chico alineado a la izquierda */
+.modal-custom-left {
+  max-width: 400px;       /* Más angosto */
+  margin: 1rem auto 1rem 1rem; /* Espaciado alineado a la izquierda */
+}
+
+@media (min-width: 768px) {
+  .modal-custom-left {
+    margin-left: 2rem;
+  }
+}
+
+/* Opcional: achicar altura del video */
+.modal-body iframe {
+  height: 200px;
+}
