@@ -6,10 +6,14 @@ const { obtenerIngredientes } = require('./src/utils/scraper');
 console.log('[DEBUG] Tipo de obtenerIngredientes:', typeof obtenerIngredientes);
 const app = express();
 const DOFUSDB_API_URL = process.env.DOFUSDB_API_URL || "https://api.dofusdb.fr/items";
-
+const mongoose = require('mongoose');
+require('dotenv').config();
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
-
+// Conectar a MongoDB Atlas
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('✅ Conectado correctamente a MongoDB Atlas'))
+  .catch(err => console.error('❌ Error al conectar a MongoDB Atlas:', err));
 // Ruta para la API de búsqueda de recetas
 app.post('/api/recipes/search', async (req, res) => {
   const { objectName } = req.body;
