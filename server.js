@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const axios = require('axios');
 const { obtenerIngredientes } = require('./src/utils/scraper');
- 
+const authRoutes = require('./src/routes/authRoutes'); 
 console.log('[DEBUG] Tipo de obtenerIngredientes:', typeof obtenerIngredientes);
 const app = express();
 const DOFUSDB_API_URL = process.env.DOFUSDB_API_URL || "https://api.dofusdb.fr/items";
@@ -57,7 +57,7 @@ app.post('/api/recipes/search', async (req, res) => {
     res.status(500).json({ success: false, error: 'Error al buscar la receta.' });
   }
 });
-
+app.use('/api', authRoutes);
 // Ruta base para servir el frontend
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
@@ -65,7 +65,7 @@ app.get('/', (req, res) => {
 
 // Iniciar el servidor
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Servidor corriendo en http://0.0.0.0:${PORT}`);
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
 
