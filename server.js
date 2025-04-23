@@ -7,9 +7,12 @@ console.log('[DEBUG] Tipo de obtenerIngredientes:', typeof obtenerIngredientes);
 const app = express();
 const DOFUSDB_API_URL = process.env.DOFUSDB_API_URL || "https://api.dofusdb.fr/items";
 const mongoose = require('mongoose');
+
 require('dotenv').config();
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
+app.use('/api', authRoutes);
+
 // Conectar a MongoDB Atlas
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('✅ Conectado correctamente a MongoDB Atlas'))
@@ -57,7 +60,7 @@ app.post('/api/recipes/search', async (req, res) => {
     res.status(500).json({ success: false, error: 'Error al buscar la receta.' });
   }
 });
-app.use('/api', authRoutes);
+
 // Ruta base para servir el frontend
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
