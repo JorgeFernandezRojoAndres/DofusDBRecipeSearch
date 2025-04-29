@@ -3,21 +3,29 @@ const path = require('path');
 const axios = require('axios');
 const { obtenerIngredientes } = require('./src/utils/scraper');
 const authRoutes = require('./src/routes/authRoutes'); 
-console.log('[DEBUG] Tipo de obtenerIngredientes:', typeof obtenerIngredientes);
-const app = express();
-const DOFUSDB_API_URL = process.env.DOFUSDB_API_URL || "https://api.dofusdb.fr/items";
 const mongoose = require('mongoose');
+const verificarToken = require('./src/middlewares/authMiddleware');
 
 require('dotenv').config();
+
+const app = express();
+const DOFUSDB_API_URL = process.env.DOFUSDB_API_URL || "https://api.dofusdb.fr/items";
+
+// ✅ Middleware para archivos estáticos (html, css, js, imágenes, etc)
 app.use(express.static(path.join(__dirname, 'public')));
+
+// ✅ Middleware para interpretar JSON
 app.use(express.json());
+
+// ✅ Tus rutas de autenticación
 app.use('/api', authRoutes);
 
-// Conectar a MongoDB Atlas
+// ✅ Conexión a MongoDB Atlas
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('✅ Conectado correctamente a MongoDB Atlas'))
   .catch(err => console.error('❌ Error al conectar a MongoDB Atlas:', err));
-// Ruta para la API de búsqueda de recetas
+
+// ✅ Ruta de búsqueda de recetas
 app.post('/api/recipes/search', async (req, res) => {
   const { objectName } = req.body;
 
@@ -44,14 +52,11 @@ app.post('/api/recipes/search', async (req, res) => {
     }
 
     const item = response.data.data[0];
-
-    // Delegar el scraping de ingredientes a la función importada
     const recipeDetails = await obtenerIngredientes(item.id);
 
-    // Formatear los datos para la respuesta
     const formattedData = {
       name: item.name?.es || 'Nombre no disponible',
-      recipe: recipeDetails // Solo devolvemos el nombre y la receta
+      recipe: recipeDetails
     };
 
     res.json({ success: true, data: formattedData });
@@ -61,14 +66,19 @@ app.post('/api/recipes/search', async (req, res) => {
   }
 });
 
-// Ruta base para servir el frontend
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// ✅ Ruta protegida para obtener el perfil
+app.get('/api/perfil', verificarToken, (req, res) => {
+  res.json({
+    message: 'Perfil accedido correctamente',
+    usuario: req.user
+  });
 });
 
-// Iniciar el servidor
+// ✅ Si no encuentra ruta, sirve automáticamente el HTML correspondiente o error
+// (Esto lo hace automáticamente express.static)
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+  console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
 });
-
+// console.log('🔴 Cerrando sesión: Borrando token...');  

@@ -4,7 +4,9 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    lowercase: true,
+    trim: true
   },
   password: {
     type: String,
@@ -13,7 +15,18 @@ const userSchema = new mongoose.Schema({
   isPremium: {
     type: Boolean,
     default: false
+  },
+  isVerified: {
+    type: Boolean,
+    default: true // ✅ verificado por defecto
   }
-});
+  ,
+  verificationToken: {
+    type: String
+  },
+  verificationExpires: {
+    type: Date
+  }
+}, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);

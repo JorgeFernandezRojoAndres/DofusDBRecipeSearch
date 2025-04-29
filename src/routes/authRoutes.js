@@ -2,11 +2,13 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const router = express.Router();
-const { generateToken } = require('../utils/jwt');
+const { generateToken, verifyToken } = require('../utils/jwt');
+const verificarToken = require('../middlewares/authMiddleware');
+
+
 router.post('/register', async (req, res) => {
   const { email, password } = req.body;
 
-  // Validación simple
   if (!email || !password) {
     return res.status(400).json({ error: 'Email y contraseña requeridos' });
   }
@@ -18,20 +20,29 @@ router.post('/register', async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({
       email,
-      password: hashedPassword
+      password: hashedPassword,
+      isVerified: true // ✅ lo marcamos como verificado automáticamente
     });
 
     await newUser.save();
-    res.status(201).json({ message: 'Usuario registrado correctamente' });
+
+    const token = generateToken({
+      id: newUser._id,
+      email: newUser.email,
+      isPremium: newUser.isPremium
+    });
+
+    res.status(201).json({ message: 'Usuario registrado correctamente', token });
   } catch (err) {
     console.error('❌ Error en el registro:', err.message);
     res.status(500).json({ error: 'Error del servidor' });
   }
 });
+
+
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
-  // Verificar que se enviaron datos
   if (!email || !password) {
     return res.status(400).json({ error: 'Email y contraseña requeridos' });
   }
@@ -43,6 +54,10 @@ router.post('/login', async (req, res) => {
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) return res.status(401).json({ error: 'Contraseña incorrecta' });
 
+    if (!user.isVerified) {
+      return res.status(403).json({ error: 'Cuenta no verificada. Revisá tu correo electrónico.' });
+    }
+
     const token = generateToken({ id: user._id, email: user.email, isPremium: user.isPremium });
 
     res.json({ message: 'Login exitoso', token });
@@ -51,4 +66,35 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ error: 'Error del servidor' });
   }
 });
+
+router.get('/perfil', verificarToken, (req, res) => {
+  res.json({
+    message: '✅ Acceso autorizado al perfil del usuario',
+    user: req.user
+  });
+});
+
+router.get('/verify', async (req, res) => {
+  const token = req.query.token;
+
+  if (!token) return res.status(400).send('Token faltante');
+
+  try {
+    const { id } = verifyToken(token);
+    const user = await User.findById(id);
+
+    if (!user) return res.status(404).send('Usuario no encontrado');
+
+    user.isVerified = true;
+    await user.save();
+
+    // ✅ Redireccionar a página HTML con el GIF
+    res.redirect('/verificacionExitosa.html');
+
+  } catch (err) {
+    console.error('❌ Error verificando usuario:', err.message);
+    res.status(400).send('Token inválido o expirado');
+  }
+});
+
 module.exports = router;
