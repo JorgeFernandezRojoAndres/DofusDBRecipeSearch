@@ -1,14 +1,20 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
+const path = require('path');
+const fs = require('fs');
 
 const User = require('../models/User');
 const router = express.Router();
 const { generateToken, verifyToken } = require('../utils/jwt');
 const verificarToken = require('../middlewares/authMiddleware');
+const enviarCorreo = require('../utils/email'); // Ya usás esto para verificar
 
-
+// Registro
 router.post('/register', async (req, res) => {
-  const { email, password } = req.body;
+  let { email, password } = req.body;
+
+  // ✅ Normalizamos el email
+  email = email.trim().toLowerCase();
 
   if (!email || !password) {
     return res.status(400).json({ error: 'Email y contraseña requeridos' });
@@ -20,9 +26,9 @@ router.post('/register', async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({
-      email,
+      email, // ✅ Ya está normalizado
       password: hashedPassword,
-      isVerified: true // ✅ lo marcamos como verificado automáticamente
+      isVerified: true
     });
 
     await newUser.save();
@@ -40,9 +46,12 @@ router.post('/register', async (req, res) => {
   }
 });
 
-
+// Login
 router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
+  let { email, password } = req.body;
+
+  // ✅ Normalizamos el email para evitar errores por espacios o mayúsculas
+  email = email.trim().toLowerCase();
 
   if (!email || !password) {
     return res.status(400).json({ error: 'Email y contraseña requeridos' });
@@ -68,6 +77,43 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// Recuperación de contraseña: Enviar correo con enlace de restablecimiento
+router.post('/recuperar', async (req, res) => {
+  const { email } = req.body;
+
+  if (!email) {
+    return res.status(400).json({ error: 'El email es requerido' });
+  }
+
+  try {
+    const user = await User.findOne({ email: email.trim().toLowerCase() });
+
+    if (!user) {
+      return res.status(404).json({ error: 'No se encontró un usuario con ese email' });
+    }
+
+    // Generar token válido por 30 minutos
+    const token = generateToken({ id: user._id }, '30m');
+
+    const url = `https://recetasdofus.com.ar/reset.html?token=${token}`;
+    const html = `
+      <h2>Recuperación de contraseña</h2>
+      <p>Hacé clic en el botón para restablecer tu contraseña:</p>
+      <a href="${url}" style="background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Restablecer contraseña</a>
+      <p>Este enlace expirará en 30 minutos.</p>
+    `;
+    console.log('🔑 Token generado para recuperación:', token);
+    console.log('🔗 URL enviada:', url);
+    await enviarCorreo(email, 'Recuperación de contraseña', html);
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error('❌ Error al enviar enlace de recuperación:', err.message);
+    res.status(500).json({ error: 'Ocurrió un error al intentar recuperar la contraseña' });
+  }
+});
+
+// Perfil protegido
 router.get('/perfil', verificarToken, (req, res) => {
   res.json({
     message: '✅ Acceso autorizado al perfil del usuario',
@@ -75,26 +121,64 @@ router.get('/perfil', verificarToken, (req, res) => {
   });
 });
 
+// Verificación de cuenta por token
 router.get('/verify', async (req, res) => {
   const token = req.query.token;
 
-  if (!token) return res.status(400).send('Token faltante');
+  if (!token) {
+    console.warn('⚠️ Token faltante en verificación');
+    return res.status(400).send('Token faltante');
+  }
 
   try {
     const { id } = verifyToken(token);
     const user = await User.findById(id);
 
-    if (!user) return res.status(404).send('Usuario no encontrado');
+    if (!user) {
+      console.warn('⚠️ Usuario no encontrado con el token');
+      return res.status(404).send('Usuario no encontrado');
+    }
 
     user.isVerified = true;
     await user.save();
 
-    // ✅ Redireccionar a página HTML con el GIF
-    res.redirect('/verificacionExitosa.html');
+    // Verificamos si el archivo existe antes de redirigir
+    const htmlPath = path.join(__dirname, '..', 'public', 'verificacionExitosa.html');
+    if (fs.existsSync(htmlPath)) {
+      return res.redirect('/verificacionExitosa.html');
+    } else {
+      console.warn('⚠️ Archivo verificacionExitosa.html no encontrado');
+      return res.status(200).send('Cuenta verificada. Pero falta la página de confirmación.');
+    }
 
   } catch (err) {
     console.error('❌ Error verificando usuario:', err.message);
-    res.status(400).send('Token inválido o expirado');
+    return res.status(400).send('Token inválido o expirado');
+  }
+});
+// ✅ Ruta para restablecer contraseña
+router.post('/reset', async (req, res) => {
+  const { token, password } = req.body;
+
+  if (!token || !password) {
+    return res.status(400).json({ error: 'Token y contraseña requeridos' });
+  }
+
+  try {
+    const decoded = verifyToken(token); // 👉 decodifica y valida el token
+    const user = await User.findById(decoded.id);
+
+    if (!user) return res.status(404).json({ error: 'Usuario no encontrado' });
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    user.password = hashedPassword;
+    await user.save();
+
+    res.json({ success: true });
+
+  } catch (err) {
+    console.error('❌ Error al restablecer la contraseña:', err.message);
+    return res.status(400).json({ error: 'Token inválido o expirado' });
   }
 });
 

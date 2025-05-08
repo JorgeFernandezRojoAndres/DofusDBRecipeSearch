@@ -1,9 +1,10 @@
 const jwt = require('jsonwebtoken');
 
-const SECRET_KEY = process.env.JWT_SECRET || 'claveSecretaUltraSegura'; // ¡Recordá guardar esto en .env!
+const SECRET_KEY = process.env.JWT_SECRET || 'claveSecretaUltraSegura';
 
-function generateToken(payload) {
-  return jwt.sign(payload, SECRET_KEY, { expiresIn: '1h' });
+// ✅ Permitir duración personalizada (por defecto 1h)
+function generateToken(payload, expiresIn = '1h') {
+  return jwt.sign(payload, SECRET_KEY, { expiresIn });
 }
 
 function verifyToken(token) {
