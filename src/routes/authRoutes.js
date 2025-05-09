@@ -181,5 +181,27 @@ router.post('/reset', async (req, res) => {
     return res.status(400).json({ error: 'Token inválido o expirado' });
   }
 });
-
+// Validar token de restablecimiento  
+router.post('/validate-reset-token', async (req, res) => {  
+  const { token } = req.body;  
+    
+  if (!token) {  
+    return res.status(400).json({ valid: false });  
+  }  
+    
+  try {  
+    // Verificar que el token sea válido  
+    const decoded = verifyToken(token);  
+    const user = await User.findById(decoded.id);  
+      
+    if (!user) {  
+      return res.json({ valid: false });  
+    }  
+      
+    res.json({ valid: true });  
+  } catch (err) {  
+    console.error('❌ Error al validar token de restablecimiento:', err.message);  
+    res.json({ valid: false });  
+  }  
+});
 module.exports = router;
