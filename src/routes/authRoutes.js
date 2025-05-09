@@ -204,4 +204,37 @@ router.post('/validate-reset-token', async (req, res) => {
     res.json({ valid: false });  
   }  
 });
+// Ruta para reenviar correo de verificación  
+router.post('/reenviar-verificacion', verificarToken, async (req, res) => {  
+  try {  
+    const userId = req.user.id;  
+    const user = await User.findById(userId);  
+
+    if (!user) {  
+      return res.status(404).json({ error: 'Usuario no encontrado' });  
+    }  
+
+    if (user.isVerified) {  
+      return res.status(400).json({ error: 'La cuenta ya está verificada' });  
+    }  
+
+    const verificationToken = generateToken({ id: user._id }, '24h');  
+    const verificationUrl = `https://recetasdofus.com.ar/verificar.html?token=${verificationToken}`;  
+
+    const html = `  
+      <h2>Verificá tu cuenta</h2>  
+      <p>Hacé clic en el siguiente enlace para completar tu registro:</p>  
+      <a href="${verificationUrl}" style="background-color: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Verificar cuenta</a>  
+      <p>Este enlace expirará en 24 horas.</p>  
+    `;  
+
+    await enviarCorreo(user.email, 'Verificación de cuenta - Recetas Dofus', html);  
+
+    return res.json({ message: 'Correo de verificación reenviado correctamente' });  
+  } catch (err) {  
+    console.error('❌ Error al reenviar verificación:', err.message);  
+    return res.status(500).json({ error: 'Error del servidor al reenviar verificación' });  
+  }  
+});
+
 module.exports = router;
