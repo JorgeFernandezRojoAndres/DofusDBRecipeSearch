@@ -33,18 +33,45 @@ router.post('/register', async (req, res) => {
 
     await newUser.save();
 
+    // 🔐 Generar token de verificación (válido por 1 día)
+    const verificationToken = generateToken(
+      { id: newUser._id, email: newUser.email },
+      '1d'
+    );
+
+    // 🌐 Enlace de verificación
+    const verificationUrl = `${process.env.BASE_URL}/api/verify?token=${verificationToken}`;
+
+    // 📤 Enviar correo
+    await transporter.sendMail({
+      from: `"Recetas Dofus" <${process.env.GMAIL_USER}>`,
+      to: newUser.email,
+      subject: "Verificá tu cuenta",
+      html: `
+        <h2>¡Bienvenido a Recetas Dofus!</h2>
+        <p>Para activar tu cuenta, hacé clic en el siguiente enlace:</p>
+        <a href="${verificationUrl}">Verificar cuenta</a>
+        <p>Este enlace expirará en 24 horas.</p>
+      `
+    });
+
     const token = generateToken({
       id: newUser._id,
       email: newUser.email,
       isPremium: newUser.isPremium
     });
 
-    res.status(201).json({ message: 'Usuario registrado correctamente', token });
+    res.status(201).json({
+      message: 'Usuario registrado correctamente. Revisa tu correo para activar tu cuenta.',
+      token
+    });
+
   } catch (err) {
     console.error('❌ Error en el registro:', err.message);
     res.status(500).json({ error: 'Error del servidor' });
   }
 });
+
 
 
 // Login
