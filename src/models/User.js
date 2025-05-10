@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
   },
   isVerified: {
     type: Boolean,
-    default: true // ✅ verificado por defecto
+    default: false // ✅ verificado por defecto
   }
   ,
   verificationToken: {
