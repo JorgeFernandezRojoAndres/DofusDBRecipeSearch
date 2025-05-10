@@ -2,7 +2,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const path = require('path');
 const fs = require('fs');
-const { enviarCorreo } = require('../utils/email');
+
 
 const User = require('../models/User');
 const router = express.Router();
@@ -150,6 +150,9 @@ router.get('/perfil', verificarToken, (req, res) => {
 });
 
 // Verificación de cuenta por token
+
+
+
 router.get('/verify', async (req, res) => {
   const token = req.query.token;
 
@@ -167,23 +170,29 @@ router.get('/verify', async (req, res) => {
       return res.status(404).send('Usuario no encontrado');
     }
 
+    if (user.isVerified) {
+      console.log('ℹ️ Usuario ya verificado');
+      return res.status(200).send('Tu cuenta ya fue verificada anteriormente.');
+    }
+
     user.isVerified = true;
     await user.save();
 
-    // Verificamos si el archivo existe antes de redirigir
+    // Verificamos si el archivo existe antes de servirlo
     const htmlPath = path.join(__dirname, '..', 'public', 'verificacionExitosa.html');
     if (fs.existsSync(htmlPath)) {
-      return res.redirect('/verificacionExitosa.html');
+      return res.sendFile(htmlPath);
     } else {
       console.warn('⚠️ Archivo verificacionExitosa.html no encontrado');
-      return res.status(200).send('Cuenta verificada. Pero falta la página de confirmación.');
+      return res.status(200).send('✅ Cuenta verificada. Pero falta la página de confirmación.');
     }
 
   } catch (err) {
     console.error('❌ Error verificando usuario:', err.message);
-    return res.status(400).send('Token inválido o expirado');
+    return res.status(400).send('Enlace inválido o expirado');
   }
 });
+
 // ✅ Ruta para restablecer contraseña
 router.post('/reset', async (req, res) => {
   const { token, password } = req.body;
