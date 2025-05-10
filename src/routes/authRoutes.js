@@ -179,7 +179,7 @@ router.get('/verify', async (req, res) => {
     await user.save();
 
     // Verificamos si el archivo existe antes de servirlo
-    const htmlPath = path.join(__dirname, '..', 'public', 'verificacionExitosa.html');
+    const htmlPath = path.join(process.cwd(), 'public', 'verificacionExitosa.html');
     if (fs.existsSync(htmlPath)) {
       return res.sendFile(htmlPath);
     } else {
