@@ -27,8 +27,8 @@ router.post('/register', async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({
       email, // ✅ Ya está normalizado
-      password: hashedPassword,
-      isVerified: true
+      password: hashedPassword
+      // isVerified se omitió para que use el valor default: false
     });
 
     await newUser.save();
@@ -45,6 +45,7 @@ router.post('/register', async (req, res) => {
     res.status(500).json({ error: 'Error del servidor' });
   }
 });
+
 
 // Login
 router.post('/login', async (req, res) => {
