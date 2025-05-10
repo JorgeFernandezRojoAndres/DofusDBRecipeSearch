@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const path = require('path');
 const fs = require('fs');
+const { enviarCorreo } = require('../utils/email');
 
 const User = require('../models/User');
 const router = express.Router();
@@ -42,18 +43,17 @@ router.post('/register', async (req, res) => {
     // 🌐 Enlace de verificación
     const verificationUrl = `${process.env.BASE_URL}/api/verify?token=${verificationToken}`;
 
-    // 📤 Enviar correo
-    await transporter.sendMail({
-      from: `"Recetas Dofus" <${process.env.GMAIL_USER}>`,
-      to: newUser.email,
-      subject: "Verificá tu cuenta",
-      html: `
+    await enviarCorreo(
+      newUser.email,
+      'Verificá tu cuenta',
+      `
         <h2>¡Bienvenido a Recetas Dofus!</h2>
         <p>Para activar tu cuenta, hacé clic en el siguiente enlace:</p>
         <a href="${verificationUrl}">Verificar cuenta</a>
         <p>Este enlace expirará en 24 horas.</p>
       `
-    });
+    );
+    console.log('🔑 Token de verificación generado:', verificationToken);    
 
     const token = generateToken({
       id: newUser._id,
