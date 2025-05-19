@@ -124,3 +124,6 @@ function mostrarModalVerificacion() {
     }
   });
 }
+document.getElementById('btnBlog').addEventListener('click', () => {  
+  window.location.href = 'blog.html';  
+});

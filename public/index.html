@@ -37,16 +37,37 @@
 </head>
 
 <body>
-<!-- Botones para NO logueados -->
-<button id="btnRedirectLogin" hidden>Iniciar Sesión</button>
-<button id="btnRedirectRegister" hidden>Registrarse</button>
 
-<!-- Botones para logueados -->
-<button id="btnUltimasRecetas" hidden>Últimas Recetas</button>
-<button id="btnVolversePremium" hidden>Volverse Premium</button>
-<button id="btnBeneficios" hidden>Ver Beneficios Premium</button>
-<button id="btnLogout" hidden>Cerrar Sesión</button>
-
+<!-- Barra de navegación -->  
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">  
+    <div class="container">  
+      <a class="navbar-brand" href="index.html">DofusDB</a>  
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">  
+        <span class="navbar-toggler-icon"></span>  
+      </button>  
+      <div class="collapse navbar-collapse" id="navbarNav">  
+        <ul class="navbar-nav me-auto">  
+          <li class="nav-item">  
+            <a class="nav-link active" href="index.html">Inicio</a>  
+          </li>  
+          <li class="nav-item">  
+            <a class="nav-link" href="blog.html">Blog</a>  
+          </li>  
+        </ul>  
+        <div class="d-flex">  
+          <!-- Botones para NO logueados -->  
+          <button id="btnRedirectLogin" class="btn btn-outline-light me-2" hidden>Iniciar Sesión</button>  
+          <button id="btnRedirectRegister" class="btn btn-warning" hidden>Registrarse</button>  
+            
+          <!-- Botones para logueados -->  
+          <button id="btnUltimasRecetas" class="btn btn-outline-light me-2" hidden>Últimas Recetas</button>  
+          <button id="btnVolversePremium" class="btn btn-warning me-2" hidden>Volverse Premium</button>  
+          <button id="btnBeneficios" class="btn btn-outline-light me-2" hidden>Ver Beneficios Premium</button>  
+          <button id="btnLogout" class="btn btn-danger" hidden>Cerrar Sesión</button>  
+        </div>  
+      </div>  
+    </div>  
+  </nav> 
 <!-- Nueva sección introductoria -->
 <section class="container mt-5 d-flex justify-content-center">
   <div class="p-4 bg-white rounded shadow" style="max-width: 600px;">

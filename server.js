@@ -5,7 +5,7 @@ const { obtenerIngredientes } = require('./src/utils/scraper');
 const authRoutes = require('./src/routes/authRoutes'); 
 const mongoose = require('mongoose');
 const verificarToken = require('./src/middlewares/authMiddleware');
-
+const blogRoutes = require('./src/routes/blogRoutes');
 require('dotenv').config();
 
 const app = express();
@@ -18,6 +18,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
 // ✅ Tus rutas de autenticación
+app.use('/api', blogRoutes);
 app.use('/api', authRoutes);
 
 // ✅ Conexión a MongoDB Atlas
