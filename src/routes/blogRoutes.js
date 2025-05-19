@@ -119,4 +119,44 @@ router.post('/posts/:id/comentario', verificarToken, async (req, res) => {
   }  
 });  
   
+// Crear o actualizar automáticamente un post desde el buscador (sin autenticación)
+router.post('/posts/updateOrCreate', async (req, res) => {
+  try {
+    console.log('[DEBUG] Petición recibida en updateOrCreate:', req.body);
+    const { nombre, descripcion, imagen, valor, ingredientes } = req.body;
+
+    if (!nombre || !valor) {
+      return res.status(400).json({ success: false, error: 'Faltan campos requeridos' });
+    }
+
+    const existente = await BlogPost.findOne({ nombre });
+
+    if (existente) {
+      existente.descripcion = descripcion;
+      existente.imagen = imagen;
+      existente.valor = valor;
+      existente.ingredientes = ingredientes;
+      existente.fechaActualizacion = Date.now();
+      await existente.save();
+
+      return res.status(200).json({ success: true, mensaje: 'Objeto actualizado en el blog' });
+    } else {
+      const nuevoPost = new BlogPost({
+        nombre,
+        descripcion,
+        imagen,
+        valor,
+        ingredientes
+      });
+
+      await nuevoPost.save();
+      return res.status(201).json({ success: true, mensaje: 'Nuevo objeto agregado al blog' });
+    }
+
+  } catch (error) {
+    console.error('Error en updateOrCreate:', error);
+    return res.status(500).json({ success: false, error: 'Error interno del servidor' });
+  }
+});
+
 module.exports = router;

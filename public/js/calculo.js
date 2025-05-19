@@ -59,7 +59,7 @@ export function calcularGanancia() {
 
   // ✅ Actualizar el Gasto en la sección verde
   const gastoElement = document.getElementById("gasto");
-  if (gastoElement) gastoElement.textContent = `${gasto} K`; // 🔥 Ahora el gasto aparece correctamente en verde
+  if (gastoElement) gastoElement.textContent = `${gasto} K`;
 
   // ✅ Actualizar la Ganancia en la sección verde
   const gananciaElement = document.getElementById("ganancia");
@@ -87,6 +87,11 @@ export function calcularGanancia() {
   console.log(` - Gasto: ${gasto} K`);
   console.log(` - Gasto Total: ${gastoTotal} K`);
   console.log(` - Ganancia: ${ganancia} K`);
+
+  // ✅ Sincronizar con el blog (solo si la función está definida)
+  if (typeof sincronizarConBlog === 'function') {
+    sincronizarConBlog();
+  }
 }
 
 // Asegurar que la función sea accesible globalmente

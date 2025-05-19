@@ -85,3 +85,41 @@ form.addEventListener("submit", async (e) => {
     calculationDetails.innerHTML = "";
   }
 });
+
+function sincronizarConBlog() {
+  const nombre = document.getElementById("nombreObjeto")?.textContent;
+  const descripcion = ""; // Se puede enriquecer más adelante
+  const imagen = ""; // Podés tomarlo desde item.image si se guarda en el DOM
+  const valor = parseInt(document.getElementById("precioObjeto")?.value || "0");
+  const gasto = parseInt(document.getElementById("gasto")?.textContent || "0");
+  const ganancia = parseInt(document.getElementById("ganancia")?.textContent || "0");
+  const listaIngredientes = JSON.parse(document.getElementById("ingredientes")?.dataset.ingredientes || "[]");
+  const ingredientes = listaIngredientes.map(ing => ing.name);
+
+  if (!nombre || valor === 0 || isNaN(valor)) {
+    console.warn("[BLOG] No se sincronizó porque falta el nombre o el valor es inválido");
+    return;
+  }
+
+  fetch("/api/posts/updateOrCreate", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      nombre,
+      descripcion,
+      imagen,
+      valor,
+      ingredientes
+    })
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        console.log("[BLOG] Objeto sincronizado correctamente con el blog:", data.mensaje);
+      } else {
+        console.warn("[BLOG] Error al sincronizar:", data.error);
+      }
+    })
+    .catch(err => console.error("[BLOG] Error de red al sincronizar:", err));
+}
+window.sincronizarConBlog = sincronizarConBlog;
