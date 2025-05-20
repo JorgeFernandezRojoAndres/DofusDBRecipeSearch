@@ -20,7 +20,9 @@ const commentSchema = new mongoose.Schema({
 const blogPostSchema = new mongoose.Schema({  
   nombre: {  
     type: String,  
-    required: true  
+    required: true,
+    unique: true,
+    trim: true  
   },  
   descripcion: String,  
   imagen: String,  

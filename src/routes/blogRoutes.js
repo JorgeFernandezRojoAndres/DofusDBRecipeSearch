@@ -129,34 +129,28 @@ router.post('/posts/updateOrCreate', async (req, res) => {
       return res.status(400).json({ success: false, error: 'Faltan campos requeridos' });
     }
 
-    const existente = await BlogPost.findOne({ nombre });
+    // 🔥 Siempre eliminar versiones anteriores del objeto antes de crear uno nuevo
+    const eliminados = await BlogPost.deleteMany({ nombre });
+    console.log(`[INFO] Se eliminaron ${eliminados.deletedCount} versiones anteriores de "${nombre}"`);
 
-    if (existente) {
-      existente.descripcion = descripcion;
-      existente.imagen = imagen;
-      existente.valor = valor;
-      existente.ingredientes = ingredientes;
-      existente.fechaActualizacion = Date.now();
-      await existente.save();
+    const nuevoPost = new BlogPost({
+      nombre,
+      descripcion,
+      imagen,
+      valor,
+      ingredientes,
+      fechaCreacion: new Date(),
+      fechaActualizacion: new Date()
+    });
 
-      return res.status(200).json({ success: true, mensaje: 'Objeto actualizado en el blog' });
-    } else {
-      const nuevoPost = new BlogPost({
-        nombre,
-        descripcion,
-        imagen,
-        valor,
-        ingredientes
-      });
-
-      await nuevoPost.save();
-      return res.status(201).json({ success: true, mensaje: 'Nuevo objeto agregado al blog' });
-    }
+    await nuevoPost.save();
+    return res.status(201).json({ success: true, mensaje: 'Versión actualizada del objeto agregada al blog' });
 
   } catch (error) {
     console.error('Error en updateOrCreate:', error);
     return res.status(500).json({ success: false, error: 'Error interno del servidor' });
   }
 });
+
 
 module.exports = router;
