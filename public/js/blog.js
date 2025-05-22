@@ -55,26 +55,25 @@ document.addEventListener('DOMContentLoaded', () => {
       const card = document.createElement('div');  
       card.className = 'col-md-4 mb-4';  
     
-      card.innerHTML = `  
-        <div class="card h-100 shadow-sm">  
-          <img src="${post.imagen || 'images/default-item.png'}" class="card-img-top" alt="${post.nombre}">  
-          <div class="card-body">  
-            <h5 class="card-title">${post.nombre}</h5>  
-            <p class="card-text">${post.descripcion || 'Sin descripción'}</p>  
-            <p class="text-muted small">Ingredientes: ${post.ingredientes?.join(', ') || 'Ninguno'}</p>  
-            <p class="text-success">Valor: ${post.valor} kamas</p>  
-            <p class="text-muted small">${tiempoTranscurrido}</p>
-            <div class="d-flex justify-content-between align-items-center">  
-              <button class="btn btn-sm btn-outline-primary like-btn" data-id="${post._id}">  
-                <i class="fas fa-thumbs-up"></i> ${post.likes || 0}  
-              </button>  
-              <button class="btn btn-sm btn-outline-secondary comentario-btn" data-id="${post._id}">  
-                <i class="fas fa-comments"></i> Ver comentarios  
-              </button>  
-            </div>  
-          </div>  
-        </div>`;  
-    
+      card.innerHTML = `
+  <div class="card h-100 shadow-sm">
+    <img src="${post.imagen || 'images/default-item.png'}" class="card-img-top" alt="${post.nombre}">
+      <div class="card-body text-center">
+      <h5 class="card-title">${post.nombre}</h5>
+      <p class="text-muted small">${tiempoTranscurrido}</p>
+      <p class="text-success fw-bold">Valor: ${post.valor} kamas</p>
+      <div class="d-flex justify-content-center gap-2 mt-3">
+        <button class="btn btn-sm btn-outline-primary like-btn" data-id="${post._id}">
+          <i class="fas fa-thumbs-up"></i> ${post.likes || 0}
+        </button>
+        <button class="btn btn-sm btn-outline-secondary comentario-btn" data-id="${post._id}">
+          <i class="fas fa-comments"></i> Comentarios
+        </button>
+      </div>
+    </div>
+  </div>
+`;
+
       contenedorPosts.appendChild(card);  
     });  
     

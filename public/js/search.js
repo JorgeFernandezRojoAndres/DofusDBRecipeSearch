@@ -1,6 +1,6 @@
 import { renderRecipe, asignarEventosCalculo } from './render.js';
 import { calcularGanancia } from './calculo.js';
-
+let imagenBuscada = "";
 const form = document.getElementById('searchForm');
 const recipeSummary = document.getElementById('recipeSummary');
 const calculationDetails = document.getElementById('calculationDetails');
@@ -39,6 +39,8 @@ form.addEventListener("submit", async (e) => {
 
     if (data.success && data.data) {
       const item = data.data;
+      imagenBuscada = item.image || ""; // ✅ Guardamos la imagen globalmente
+      console.log("[DEBUG] Datos recibidos del servidor:", data);
       console.log("[DEBUG] Datos recibidos del servidor:", item);
 
       // Renderizar la información en `recipeSummary`
@@ -89,7 +91,9 @@ form.addEventListener("submit", async (e) => {
 function sincronizarConBlog() {
   const nombre = document.getElementById("nombreObjeto")?.textContent;
   const descripcion = ""; // Se puede enriquecer más adelante
-  const imagen = ""; // Podés tomarlo desde item.image si se guarda en el DOM
+  const imagen = imagenBuscada;
+
+
   const valor = parseInt(document.getElementById("precioObjeto")?.value || "0");
   const gasto = parseInt(document.getElementById("gasto")?.textContent || "0");
   const ganancia = parseInt(document.getElementById("ganancia")?.textContent || "0");
