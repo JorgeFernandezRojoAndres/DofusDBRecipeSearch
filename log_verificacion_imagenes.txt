@@ -1,0 +1,34 @@
+🔸 Imagen por defecto para "Anillo de guerrero albuereño" - /images/images/default-item.png
+🔸 Imagen por defecto para "Pócima de recaudador notable" - /images/images/default-item.png
+🔸 Imagen por defecto para "Alianza de Silimella" - /images/images/default-item.png
+🔸 Imagen por defecto para "Zuecos de tacón de aguja de Felín" - /images/images/default-item.png
+🔸 Imagen por defecto para "Calzalanas" - /images/images/default-item.png
+🔸 Imagen por defecto para "Botas de aprendizaje" - /images/images/default-item.png
+🔸 Imagen por defecto para "Cola de Rakooper" - /images/images/default-item.png
+🔸 Imagen por defecto para "Pócima de recaudador espléndida" - /images/images/default-item.png
+🔸 Imagen por defecto para "Pócima de viajero dimensional" - /images/images/default-item.png
+🔸 Imagen por defecto para "Pócima de recaudador formidable" - /images/images/default-item.png
+🔸 Imagen por defecto para "Varita Rosca" - /images/images/default-item.png
+🔸 Imagen por defecto para "Arki Tekto" - /images/images/default-item.png
+🔸 Imagen por defecto para "Capa del Wey Wabbit" - /images/default-item.png
+🔸 Imagen por defecto para "Corona del Wey Wabbit" - /images/default-item.png
+🔸 Imagen por defecto para "Bastón del Wey Wabbit" - /images/default-item.png
+🔸 Imagen por defecto para "Abramú" - /images/default-item.png
+🔸 Imagen por defecto para "Gelanillo" - /images/default-item.png
+🔸 Imagen por defecto para "Casco de dragohuevo" - /images/default-item.png
+🔸 Imagen por defecto para "Anillo de dragohuevo" - /images/default-item.png
+🔸 Imagen por defecto para "Amublop Índigo Real" - /images/default-item.png
+🔸 Imagen por defecto para "Amuleto de guerrero albuereño" - /images/default-item.png
+🔸 Imagen por defecto para "Amuleto de la Bobola" - /images/default-item.png
+🔸 Imagen por defecto para "Dados de la Suerte" - /images/default-item.png
+🔸 Imagen por defecto para "Chakra Style" - /images/default-item.png
+🔸 Imagen por defecto para "Anillo Chanicomo" - /images/default-item.png
+🔸 Imagen por defecto para "Ugahmuleto" - /images/default-item.png
+🔸 Imagen por defecto para "Botas de Infernus" - /images/default-item.png
+🔸 Imagen por defecto para "Pócima de recuerdo" - /images/default-item.png
+🔸 Imagen por defecto para "Cinturón de Koxys" - /images/default-item.png
+
+🔎 Resumen:
+Total de posts: 29
+Imágenes válidas: 0
+Imágenes rotas: 0

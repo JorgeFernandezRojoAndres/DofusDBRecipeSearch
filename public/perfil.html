@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mi Perfil - Recetas Dofus</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Asegurate que esté bien enlazado -->
+</head>
+<body>
+  <h1>👤 Mi Perfil</h1>
+
+  <div class="container">
+    <div class="section" id="infoPerfil">
+      <p>Cargando información del perfil...</p>
+    </div>
+
+    <div class="section">
+      <button onclick="window.location.href='/index.html'">Ir a la Página Principal</button>
+      <button onclick="cerrarSesion()">Cerrar Sesión</button>
+    </div>
+  </div>
+
+  <script>
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      window.location.href = "/login.html";
+    } else {
+      fetch('/api/perfil', {
+        headers: {
+          'Authorization': 'Bearer ' + token
+        }
+      })
+      .then(res => {
+        if (!res.ok) throw new Error("No autorizado");
+        return res.json();
+      })
+      .then(data => {
+        const user = data.user;
+        document.getElementById('infoPerfil').innerHTML = `
+          <p><strong>Email:</strong> ${user.email}</p>
+          <p><strong>Premium:</strong> ${user.isPremium ? 'Sí' : 'No'}</p>
+        `;
+      })
+      .catch(() => {
+        localStorage.removeItem('token');
+        window.location.href = "/login.html";
+      });
+    }
+
+    function cerrarSesion() {
+      localStorage.removeItem('token');
+      window.location.href = "/index.html";
+    }
+  </script>
+</body>
+</html>
