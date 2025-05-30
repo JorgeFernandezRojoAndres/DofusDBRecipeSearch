@@ -136,7 +136,7 @@ router.post('/posts/updateOrCreate', async (req, res) => {
     const nuevoPost = new BlogPost({
       nombre,
       descripcion,
-      imagen,
+      imagen: imagen,
       valor,
       ingredientes,
       fechaCreacion: new Date(),

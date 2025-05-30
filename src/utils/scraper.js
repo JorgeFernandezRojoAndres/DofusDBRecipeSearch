@@ -6,7 +6,7 @@ console.log('[DEBUG] scraper.js ha sido cargado correctamente');
 async function obtenerIngredientes(itemId) {
     try {
         // Construir la URL de la API con el ID del objeto
-        const apiUrl = `https://api.dofusdb.fr/recipes?resultId=${itemId}&lang=fr`;
+        const apiUrl = `https://api.dofusdb.fr/recipes?resultId=${itemId}&lang=es`;
         console.debug(`[DEBUG] Solicitando datos desde: ${apiUrl}`);
 
         // Hacer la solicitud HTTP

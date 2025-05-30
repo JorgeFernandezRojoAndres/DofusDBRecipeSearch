@@ -42,38 +42,39 @@ app.post('/api/recipes/search', async (req, res) => {
 
   // Función interna para consultar la API externa
   async function buscarEnApi(nombreBuscado) {
-    const formattedName = nombreBuscado.split(' ').join('+');
-    const url = `${DOFUSDB_API_URL}?slug.es[$search]=${formattedName}&level[$gte]=0&level[$lte]=200&lang=es`;
+  const formattedName = nombreBuscado.split(' ').join('+');
+  const url = `${DOFUSDB_API_URL}?slug.es[$search]=${formattedName}&level[$gte]=0&level[$lte]=200&lang=es`;
 
-    console.log(`[DEBUG] URL construida: ${url}`);
+  console.log(`[DEBUG] URL construida: ${url}`);
 
-    try {
-      const response = await axios.get(url, {
-        headers: {
-          accept: "application/json, text/plain, */*",
-          "accept-language": "es-ES,es;q=0.9",
-          Referer: "https://dofusdb.fr/",
-        },
-      });
+  try {
+    const response = await axios.get(url, {
+      headers: {
+        accept: "application/json, text/plain, */*",
+        "accept-language": "es-ES,es;q=0.9",
+        Referer: "https://dofusdb.fr/",
+      },
+    });
 
-      if (response.data.data.length === 0) {
-        console.log(`[INFO] No se encontraron resultados para: ${nombreBuscado}`);
-        return null;
-      }
-
-      const item = response.data.data[0];
-      const recipeDetails = await obtenerIngredientes(item.id);
-
-      return {
-        name: item.name?.es || 'Nombre no disponible',
-        recipe: recipeDetails,
-        image: item.image || ""
-      };
-    } catch (error) {
-      console.error('[ERROR] Error al buscar la receta:', error.message);
-      throw error;
+    if (response.data.data.length === 0) {
+      console.log(`[INFO] No se encontraron resultados para: ${nombreBuscado}`);
+      return null;
     }
+
+    const item = response.data.data[0];
+    const recipeDetails = await obtenerIngredientes(item.id);
+
+    return {
+      name: item.name?.es || 'Nombre no disponible',
+      recipe: recipeDetails,
+      image: item.img || "/default-image.png", // 🔥 Asegúrate de usar `item.img`
+    };
+  } catch (error) {
+    console.error('[ERROR] Error al buscar la receta:', error.message);
+    throw error;
   }
+}
+
 
   try {
     // Primero busco con el nombre original

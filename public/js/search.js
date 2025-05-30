@@ -44,7 +44,7 @@ form.addEventListener("submit", async (e) => {
 
     if (data.success && data.data) {
       const item = data.data;
-      imagenBuscada = item.image || ""; // ✅ Guardamos la imagen globalmente
+      imagenBuscada = item.image || item.img || "/default-image.png"; // ✅ Guardamos la imagen globalmente
       console.log("[DEBUG] Datos recibidos del servidor:", data);
       console.log("[DEBUG] Datos recibidos del servidor:", item);
 
@@ -96,9 +96,10 @@ form.addEventListener("submit", async (e) => {
 
 function sincronizarConBlog() {
   const nombre = document.getElementById("nombreObjeto")?.textContent;
-  const descripcion = ""; // Se puede enriquecer más adelante
-  const imagen = imagenBuscada;
-
+  const descripcion = "";
+  const imagen = imagenBuscada || "/default-image.png";
+  const id = window.item?.id || null;
+  const slug = window.item?.slug || null;
 
   const valor = parseInt(document.getElementById("precioObjeto")?.value || "0");
   const gasto = parseInt(document.getElementById("gasto")?.textContent || "0");
@@ -110,6 +111,30 @@ function sincronizarConBlog() {
     console.warn("[BLOG] No se sincronizó porque falta el nombre o el valor es inválido");
     return;
   }
+
+  fetch("/api/posts/updateOrCreate", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      id,
+      slug,
+      nombre,
+      descripcion,
+      imagen,
+      valor,
+      ingredientes
+    })
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        console.log("[BLOG] Objeto sincronizado correctamente con el blog:", data.mensaje);
+      } else {
+        console.warn("[BLOG] Error al sincronizar:", data.error);
+      }
+    })
+    .catch(err => console.error("[BLOG] Error de red al sincronizar:", err));
+}
 
   fetch("/api/posts/updateOrCreate", {
     method: "POST",
