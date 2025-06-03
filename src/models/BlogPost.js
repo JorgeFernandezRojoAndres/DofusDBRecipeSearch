@@ -30,6 +30,14 @@ const blogPostSchema = new mongoose.Schema({
     type: Number,  
     default: 0  
   },  
+  gasto: {   // 👈 Campo añadido para guardar el gasto
+    type: Number,
+    default: 0
+  },
+  ganancia: {   // 👈 Campo añadido para guardar la ganancia (opcional)
+    type: Number,
+    default: 0
+  },  
   ingredientes: [String],  
   likes: {  
     type: Number,  
@@ -48,7 +56,8 @@ const blogPostSchema = new mongoose.Schema({
     type: Date,  
     default: Date.now  
   }  
-});  
+});
+
   
 // Middleware para actualizar fechaActualizacion automáticamente  
 blogPostSchema.pre('save', function(next) {  

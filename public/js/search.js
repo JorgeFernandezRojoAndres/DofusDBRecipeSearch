@@ -11,9 +11,7 @@ const ingredientesTotalesList = document.getElementById('ingredientesTotales');
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  // Obtenemos el nombre y normalizamos para evitar problemas con acentos raros
   const objectNameRaw = document.getElementById("objectName").value.trim();
-  // Normalizamos la cadena a Unicode NFC (forma compuesta) para evitar problemas con acentos
   const objectName = objectNameRaw.normalize("NFC");
 
   console.log("[DEBUG] Nombre del objeto enviado:", objectName);
@@ -29,7 +27,6 @@ form.addEventListener("submit", async (e) => {
     recipeSummary.innerHTML = "<p>Buscando...</p>";
     calculationDetails.innerHTML = "";
 
-    // Enviamos el nombre codificado correctamente en JSON
     const response = await fetch("/api/recipes/search", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -44,11 +41,10 @@ form.addEventListener("submit", async (e) => {
 
     if (data.success && data.data) {
       const item = data.data;
-      imagenBuscada = item.image || item.img || "/default-image.png"; // ✅ Guardamos la imagen globalmente
+      imagenBuscada = item.image || item.img || "/default-image.png";
       console.log("[DEBUG] Datos recibidos del servidor:", data);
       console.log("[DEBUG] Datos recibidos del servidor:", item);
 
-      // Renderizar la información en `recipeSummary`
       recipeSummary.innerHTML = `
         <h2 id="nombreObjeto">${item.name || "Nombre no disponible"}</h2>
         
@@ -62,7 +58,6 @@ form.addEventListener("submit", async (e) => {
         <h3>Ganancia: <span id="ganancia">0</span> K</h3>
       `;
 
-      // Renderizar la sección de cálculos en `calculationDetails`
       calculationDetails.innerHTML = `
         <label>Cantidad a fabricar:
           <input type="number" id="cantidadFabricar" value="1" min="1" class="price-input">
@@ -74,10 +69,7 @@ form.addEventListener("submit", async (e) => {
         <ul id="ingredientesTotales"></ul>
       `;
 
-      // Guardar ingredientes en dataset para cálculos
       document.getElementById("ingredientes").dataset.ingredientes = JSON.stringify(item.recipe);
-
-      // Asignar eventos dinámicamente para calcular la ganancia al modificar los valores
       asignarEventosCalculo();
 
     } else {
@@ -93,7 +85,6 @@ form.addEventListener("submit", async (e) => {
   }
 });
 
-
 function sincronizarConBlog() {
   const nombre = document.getElementById("nombreObjeto")?.textContent;
   const descripcion = "";
@@ -102,16 +93,18 @@ function sincronizarConBlog() {
   const slug = window.item?.slug || null;
 
   const valor = parseInt(document.getElementById("precioObjeto")?.value || "0");
-  const gasto = parseInt(document.getElementById("gasto")?.textContent || "0");
-  const ganancia = parseInt(document.getElementById("ganancia")?.textContent || "0");
-  const listaIngredientes = JSON.parse(document.getElementById("ingredientes")?.dataset.ingredientes || "[]");
-  const ingredientes = listaIngredientes.map(ing => ing.name);
+const gasto = parseInt(document.getElementById("gastoTotal")?.textContent?.replace(/\D/g, "") || "0"); // 🔥 Corrección: extrae solo números del Gasto Total
+const ganancia = parseInt(document.getElementById("ganancia")?.textContent?.replace(/\D/g, "") || "0"); // 🔥 (opcional) extrae solo números de Ganancia
+const listaIngredientes = JSON.parse(document.getElementById("ingredientes")?.dataset.ingredientes || "[]");
+const ingredientes = listaIngredientes.map(ing => ing.name);
+
 
   if (!nombre || valor === 0 || isNaN(valor)) {
     console.warn("[BLOG] No se sincronizó porque falta el nombre o el valor es inválido");
     return;
   }
 
+  // 🔥 Enviar también gasto y ganancia al backend
   fetch("/api/posts/updateOrCreate", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -122,6 +115,8 @@ function sincronizarConBlog() {
       descripcion,
       imagen,
       valor,
+      gasto,       // 👈 Nuevo campo gasto
+      ganancia,    // 👈 Nuevo campo ganancia
       ingredientes
     })
   })
@@ -136,25 +131,4 @@ function sincronizarConBlog() {
     .catch(err => console.error("[BLOG] Error de red al sincronizar:", err));
 }
 
-  fetch("/api/posts/updateOrCreate", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      nombre,
-      descripcion,
-      imagen,
-      valor,
-      ingredientes
-    })
-  })
-    .then(res => res.json())
-    .then(data => {
-      if (data.success) {
-        console.log("[BLOG] Objeto sincronizado correctamente con el blog:", data.mensaje);
-      } else {
-        console.warn("[BLOG] Error al sincronizar:", data.error);
-      }
-    })
-    .catch(err => console.error("[BLOG] Error de red al sincronizar:", err));
-}
 window.sincronizarConBlog = sincronizarConBlog;

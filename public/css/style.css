@@ -141,6 +141,11 @@ input {
 #calculationDetails:hover {
   background: linear-gradient(135deg, #64b5f6, #1e88e5);
 }
+.card {
+  margin: 20px; /* Espacio alrededor de la tarjeta */
+  border: 4px solid rgb(7, 0, 0); /* Cambia 'red' por el color que quieras */
+  border-radius: 10px; /* (Opcional) Bordes redondeados */
+}
 
 /* Hacer responsive */
 @media (max-width: 768px) {

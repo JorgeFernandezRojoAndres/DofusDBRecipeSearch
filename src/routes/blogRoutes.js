@@ -123,7 +123,7 @@ router.post('/posts/:id/comentario', verificarToken, async (req, res) => {
 router.post('/posts/updateOrCreate', async (req, res) => {
   try {
     console.log('[DEBUG] Petición recibida en updateOrCreate:', req.body);
-    const { nombre, descripcion, imagen, valor, ingredientes } = req.body;
+    const { nombre, descripcion, imagen, valor, gasto, ganancia, ingredientes } = req.body; // 👈 AÑADIDOS gasto y ganancia
 
     if (!nombre || !valor) {
       return res.status(400).json({ success: false, error: 'Faltan campos requeridos' });
@@ -138,6 +138,8 @@ router.post('/posts/updateOrCreate', async (req, res) => {
       descripcion,
       imagen: imagen,
       valor,
+      gasto,      // 👈 AÑADIDO gasto
+      ganancia,   // 👈 AÑADIDO ganancia
       ingredientes,
       fechaCreacion: new Date(),
       fechaActualizacion: new Date()
@@ -151,6 +153,5 @@ router.post('/posts/updateOrCreate', async (req, res) => {
     return res.status(500).json({ success: false, error: 'Error interno del servidor' });
   }
 });
-
 
 module.exports = router;
