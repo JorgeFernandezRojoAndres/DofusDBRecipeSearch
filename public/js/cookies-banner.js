@@ -2,7 +2,16 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!localStorage.getItem("cookiesDecision")) {
     const banner = document.createElement("div");
     banner.id = "cookieBanner";
-    banner.className = "alert alert-dark fixed-bottom text-center mb-0";
+    banner.style.position = "fixed";
+banner.style.bottom = "0";
+banner.style.left = "0";
+banner.style.width = "100%";
+banner.style.backgroundColor = "#222"; // Fondo oscuro
+banner.style.color = "#fff";           // Texto blanco
+banner.style.padding = "15px";
+banner.style.textAlign = "center";
+banner.style.zIndex = "9999";
+
     banner.innerHTML = `
       Este sitio utiliza cookies para análisis y funcionalidad. 
       <a href="privacidad.html" class="text-warning text-decoration-underline">Más información</a>.
