@@ -52,33 +52,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const fechaActualizacion = new Date(post.fechaActualizacion);  
     const tiempoTranscurrido = obtenerTiempoTranscurrido(fechaActualizacion);  
   
-    const card = document.createElement('div');  
-    card.className = 'col-md-3 mb-4';  
-  
-    card.innerHTML = `
-      <div class="card h-100 shadow-sm">
-        <img src="${post.imagen || 'images/default-item.png'}" class="card-img-top" alt="${post.nombre}">
-        <div class="card-body text-center">
-          <h5 class="card-title">${post.nombre}</h5>
-          <p class="text-muted small">${tiempoTranscurrido}</p>
-          <p class="text-danger fw-bold">Gasto: ${post.gasto || 0} kamas</p> <!-- 👈 AÑADIMOS GASTO -->
-          <p class="text-success fw-bold">Valor: ${post.valor} kamas</p>
-          ${post.ganancia !== undefined ? `
-          <p class="fw-bold" style="color: ${post.ganancia >= 0 ? 'green' : 'red'}">
-            ${post.ganancia >= 0 ? 'Ganancia' : 'Pérdida'}: ${Math.abs(post.ganancia)} kamas
-          </p>
-          ` : ''}
-          <div class="d-flex justify-content-center gap-2 mt-3">
-            <button class="btn btn-sm btn-outline-primary like-btn" data-id="${post._id}">
-              <i class="fas fa-thumbs-up"></i> ${post.likes || 0}
-            </button>
-            <button class="btn btn-sm btn-outline-secondary comentario-btn" data-id="${post._id}">
-              <i class="fas fa-comments"></i> Comentarios
-            </button>
-          </div>
-        </div>
-      </div>
-    `;  
+    const card = document.createElement('div');
+card.className = 'card mb-4 shadow-sm'; // agregamos sombra directamente aquí
+
+card.innerHTML = `
+  <img src="${post.imagen || 'images/default-item.png'}" class="card-img-top" alt="${post.nombre}">
+  <div class="card-body text-center">
+    <h5 class="card-title">${post.nombre}</h5>
+    <p class="text-muted small">${tiempoTranscurrido}</p>
+    <p class="text-danger fw-bold">Gasto: ${post.gasto || 0} kamas</p>
+    <p class="text-success fw-bold">Valor: ${post.valor} kamas</p>
+    ${post.ganancia !== undefined ? `
+    <p class="fw-bold" style="color: ${post.ganancia >= 0 ? 'green' : 'red'}">
+      ${post.ganancia >= 0 ? 'Ganancia' : 'Pérdida'}: ${Math.abs(post.ganancia)} kamas
+    </p>
+    ` : ''}
+    <div class="d-flex justify-content-center gap-2 mt-3">
+      <button class="btn btn-sm btn-outline-primary like-btn" data-id="${post._id}">
+        <i class="fas fa-thumbs-up"></i> ${post.likes || 0}
+      </button>
+      <button class="btn btn-sm btn-outline-secondary comentario-btn" data-id="${post._id}">
+        <i class="fas fa-comments"></i> Comentarios
+      </button>
+    </div>
+  </div>
+`;
+
   
     contenedorPosts.appendChild(card);  
   });  
