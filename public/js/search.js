@@ -40,7 +40,8 @@ form.addEventListener("submit", async (e) => {
     const data = await response.json();
 
     if (data.success && data.data) {
-      const item = data.data;
+       const item = data.data;
+      window.item = item;
       imagenBuscada = item.image || item.img || "/default-image.png";
       console.log("[DEBUG] Datos recibidos del servidor:", data);
       console.log("[DEBUG] Datos recibidos del servidor:", item);
@@ -87,7 +88,8 @@ form.addEventListener("submit", async (e) => {
 
 function sincronizarConBlog() {
   const nombre = document.getElementById("nombreObjeto")?.textContent;
-  const descripcion = "";
+  const descripcion = window.item?.description || "";
+
   const imagen = imagenBuscada || "/default-image.png";
   const id = window.item?.id || null;
   const slug = window.item?.slug || null;

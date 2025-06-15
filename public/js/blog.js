@@ -59,14 +59,21 @@ card.innerHTML = `
   <img src="${post.imagen || 'images/default-item.png'}" class="card-img-top" alt="${post.nombre}">
   <div class="card-body text-center">
     <h5 class="card-title">${post.nombre}</h5>
+    
+    ${post.descripcion ? `
+      <p class="text-description text-muted small fst-italic">${post.descripcion}</p>
+    ` : ''}
+
     <p class="text-muted small">${tiempoTranscurrido}</p>
     <p class="text-danger fw-bold">Gasto: ${post.gasto || 0} kamas</p>
     <p class="text-success fw-bold">Valor: ${post.valor} kamas</p>
+    
     ${post.ganancia !== undefined ? `
-    <p class="fw-bold" style="color: ${post.ganancia >= 0 ? 'green' : 'red'}">
-      ${post.ganancia >= 0 ? 'Ganancia' : 'Pérdida'}: ${Math.abs(post.ganancia)} kamas
-    </p>
+      <p class="fw-bold" style="color: ${post.ganancia >= 0 ? 'green' : 'red'}">
+        ${post.ganancia >= 0 ? 'Ganancia' : 'Pérdida'}: ${Math.abs(post.ganancia)} kamas
+      </p>
     ` : ''}
+    
     <div class="d-flex justify-content-center gap-2 mt-3">
       <button class="btn btn-sm btn-outline-primary like-btn" data-id="${post._id}">
         <i class="fas fa-thumbs-up"></i> ${post.likes || 0}

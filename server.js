@@ -65,10 +65,12 @@ app.post('/api/recipes/search', async (req, res) => {
     const recipeDetails = await obtenerIngredientes(item.id);
 
     return {
-      name: item.name?.es || 'Nombre no disponible',
-      recipe: recipeDetails,
-      image: item.img || "/default-image.png", // 🔥 Asegúrate de usar `item.img`
-    };
+  name: item.name?.es || 'Nombre no disponible',
+  description: item.description?.es || '', // ✅ Agregado
+  recipe: recipeDetails,
+  image: item.img || "/default-image.png"
+};
+
   } catch (error) {
     console.error('[ERROR] Error al buscar la receta:', error.message);
     throw error;
