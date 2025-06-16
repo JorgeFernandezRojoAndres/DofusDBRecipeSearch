@@ -94,19 +94,25 @@ function sincronizarConBlog() {
   const id = window.item?.id || null;
   const slug = window.item?.slug || null;
 
-  const valor = parseInt(document.getElementById("precioObjeto")?.value || "0");
-const gasto = parseInt(document.getElementById("gastoTotal")?.textContent?.replace(/\D/g, "") || "0"); // 🔥 Corrección: extrae solo números del Gasto Total
-const ganancia = parseInt(document.getElementById("ganancia")?.textContent?.replace(/\D/g, "") || "0"); // 🔥 (opcional) extrae solo números de Ganancia
-const listaIngredientes = JSON.parse(document.getElementById("ingredientes")?.dataset.ingredientes || "[]");
-const ingredientes = listaIngredientes.map(ing => ing.name);
+  const cantidad = parseInt(document.getElementById("cantidadFabricar")?.value || "1");
+  const valorUnitario = parseInt(document.getElementById("precioObjeto")?.value || "0");
 
+  const gastoTotal = parseInt(document.getElementById("gastoTotal")?.textContent?.replace(/\D/g, "") || "0");
+  const gananciaTotal = parseInt(document.getElementById("gananciaTotal")?.textContent?.replace(/\D/g, "") || "0");
+
+  // 🧠 Siempre usar valores unitarios
+  const valor = valorUnitario;
+  const gasto = cantidad > 0 ? Math.round(gastoTotal / cantidad) : 0;
+  const ganancia = cantidad > 0 ? Math.round(gananciaTotal / cantidad) : 0;
+
+  const listaIngredientes = JSON.parse(document.getElementById("ingredientes")?.dataset.ingredientes || "[]");
+  const ingredientes = listaIngredientes.map(ing => ing.name);
 
   if (!nombre || valor === 0 || isNaN(valor)) {
     console.warn("[BLOG] No se sincronizó porque falta el nombre o el valor es inválido");
     return;
   }
 
-  // 🔥 Enviar también gasto y ganancia al backend
   fetch("/api/posts/updateOrCreate", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -117,8 +123,8 @@ const ingredientes = listaIngredientes.map(ing => ing.name);
       descripcion,
       imagen,
       valor,
-      gasto,       // 👈 Nuevo campo gasto
-      ganancia,    // 👈 Nuevo campo ganancia
+      gasto,
+      ganancia,
       ingredientes
     })
   })

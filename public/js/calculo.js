@@ -55,7 +55,9 @@ export function calcularGanancia() {
   console.log("[DEBUG] Precio del objeto:", precioObjeto);
 
   // Calcular la ganancia correctamente
-  const ganancia = (precioObjeto * cantidadFabricar) - gastoTotal;
+  const gananciaUnidad = precioObjeto - gasto;
+  const gananciaTotal = gananciaUnidad * cantidadFabricar;
+
 
   // ✅ Actualizar el Gasto en la sección verde
   const gastoElement = document.getElementById("gasto");
@@ -63,11 +65,11 @@ export function calcularGanancia() {
 
   // ✅ Actualizar la Ganancia en la sección verde
   const gananciaElement = document.getElementById("ganancia");
-  if (gananciaElement) gananciaElement.textContent = `${ganancia} K`;
+  if (gananciaElement) gananciaElement.textContent = `${gananciaUnidad} K`;
 
   // ✅ Actualizar la Ganancia Total en la sección azul
   const gananciaTotalElement = document.getElementById("gananciaTotal");
-  if (gananciaTotalElement) gananciaTotalElement.textContent = `${ganancia} K`;
+  if (gananciaTotalElement) gananciaTotalElement.textContent = `${gananciaTotal} K`;
 
   // ✅ Restaurar la actualización de "Gasto Total" en la sección azul
   let gastoTotalElement = document.getElementById("gastoTotal");
@@ -84,9 +86,12 @@ export function calcularGanancia() {
   if (ingredientesTotalesElement) ingredientesTotalesElement.innerHTML = ingredientesTotalesHTML;
 
   console.log("[DEBUG] Cálculo completado:");
-  console.log(` - Gasto: ${gasto} K`);
-  console.log(` - Gasto Total: ${gastoTotal} K`);
-  console.log(` - Ganancia: ${ganancia} K`);
+console.log(` - Gasto: ${gasto} K`);
+console.log(` - Gasto Total: ${gastoTotal} K`);
+console.log(` - Ganancia por unidad: ${gananciaUnidad} K`);
+console.log(` - Ganancia total: ${gananciaTotal} K`);
+
+
 
   // ✅ Sincronizar con el blog (solo si la función está definida)
   if (typeof sincronizarConBlog === 'function') {
