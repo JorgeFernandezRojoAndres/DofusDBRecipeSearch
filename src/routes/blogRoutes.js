@@ -1,36 +1,41 @@
-// src/routes/blogRoutes.js  
 const express = require('express');  
 const router = express.Router();  
 const BlogPost = require('../models/BlogPost');  
 const verificarToken = require('../middlewares/authMiddleware');  
   
-// Obtener todos los posts (con filtros opcionales)  
+// Obtener todos los posts (con filtros opcionales + paginación)  
 router.get('/posts', async (req, res) => {  
   try {  
-    const { ordenarPor, filtroValor } = req.query;  
-    let query = {};  
-    let sort = {};  
-      
-    // Aplicar filtro por valor mínimo si se especifica  
+    const { ordenarPor, filtroValor, page = 1, limit = 6 } = req.query;
+
+    const query = {};  
+    const sort = {};  
+
     if (filtroValor) {  
       query.valor = { $gte: parseInt(filtroValor) };  
     }  
-      
-    // Aplicar ordenamiento  
+
     if (ordenarPor === 'valor') {  
-      sort.valor = -1; // Descendente por valor  
+      sort.valor = -1;  
     } else if (ordenarPor === 'reciente') {  
-      sort.fechaActualizacion = -1; // Descendente por fecha de actualización  
+      sort.fechaActualizacion = -1;  
     } else {  
-      sort.fechaCreacion = -1; // Por defecto, los más nuevos primero  
+      sort.fechaCreacion = -1;  
     }  
-      
-    const posts = await BlogPost.find(query)  
-      .sort(sort)  
-      .populate('usuariosLike', 'username')  
-      .populate('comentarios.usuario', 'username');  
-        
-    res.json({ success: true, data: posts });  
+
+    const skip = (parseInt(page) - 1) * parseInt(limit);
+
+    const [posts, total] = await Promise.all([
+      BlogPost.find(query)
+        .sort(sort)
+        .skip(skip)
+        .limit(parseInt(limit))
+        .populate('usuariosLike', 'username')
+        .populate('comentarios.usuario', 'username'),
+      BlogPost.countDocuments(query)
+    ]);
+
+    res.json({ success: true, data: posts, total });  
   } catch (error) {  
     console.error('Error al obtener posts:', error);  
     res.status(500).json({ success: false, error: 'Error al obtener los posts' });  
@@ -66,15 +71,12 @@ router.post('/posts/:id/like', verificarToken, async (req, res) => {
       return res.status(404).json({ success: false, error: 'Post no encontrado' });  
     }  
       
-    // Verificar si el usuario ya dio like  
     const userIndex = post.usuariosLike.indexOf(req.user.id);  
       
     if (userIndex === -1) {  
-      // Añadir like  
       post.likes += 1;  
       post.usuariosLike.push(req.user.id);  
     } else {  
-      // Quitar like  
       post.likes -= 1;  
       post.usuariosLike.splice(userIndex, 1);  
     }  
@@ -107,8 +109,6 @@ router.post('/posts/:id/comentario', verificarToken, async (req, res) => {
     });  
       
     await post.save();  
-      
-    // Obtener el post actualizado con los datos de usuario en comentarios  
     const updatedPost = await BlogPost.findById(req.params.id)  
       .populate('comentarios.usuario', 'username');  
         
@@ -123,13 +123,12 @@ router.post('/posts/:id/comentario', verificarToken, async (req, res) => {
 router.post('/posts/updateOrCreate', async (req, res) => {
   try {
     console.log('[DEBUG] Petición recibida en updateOrCreate:', req.body);
-    const { nombre, descripcion, imagen, valor, gasto, ganancia, ingredientes } = req.body; // 👈 AÑADIDOS gasto y ganancia
+    const { nombre, descripcion, imagen, valor, gasto, ganancia, ingredientes } = req.body;
 
     if (!nombre || !valor) {
       return res.status(400).json({ success: false, error: 'Faltan campos requeridos' });
     }
 
-    // 🔥 Siempre eliminar versiones anteriores del objeto antes de crear uno nuevo
     const eliminados = await BlogPost.deleteMany({ nombre });
     console.log(`[INFO] Se eliminaron ${eliminados.deletedCount} versiones anteriores de "${nombre}"`);
 
@@ -138,8 +137,8 @@ router.post('/posts/updateOrCreate', async (req, res) => {
       descripcion,
       imagen: imagen,
       valor,
-      gasto,      // 👈 AÑADIDO gasto
-      ganancia,   // 👈 AÑADIDO ganancia
+      gasto,
+      ganancia,
       ingredientes,
       fechaCreacion: new Date(),
       fechaActualizacion: new Date()
