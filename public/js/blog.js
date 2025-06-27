@@ -53,7 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const card = document.createElement('div');
       card.className = 'card mb-4 shadow-sm';
       card.innerHTML = `
-        <img src="${post.imagen || 'images/default-item.png'}" class="card-img-top" alt="${post.nombre}">
+        <img loading="lazy" src="${post.imagen || 'images/default-item.png'}" class="card-img-top" alt="${post.nombre}" width="100%" height="auto">
+
         <div class="card-body text-center">
           <h5 class="card-title">${post.nombre}</h5>
           ${post.descripcion ? `<p class="text-description text-muted small fst-italic">${post.descripcion}</p>` : ''}
@@ -132,4 +133,25 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log(`Mostrar comentarios del post ${idPost} (completa esta función)`);
     comentariosModal.show();
   }
+});
+document.addEventListener('mousemove', (e) => {
+  document.querySelectorAll('.card-img-top').forEach(img => {
+    const rect = img.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = (y - centerY) / 20;
+    const rotateY = (x - centerX) / -20;
+
+    img.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+  });
+});
+
+document.addEventListener('mouseleave', () => {
+  document.querySelectorAll('.card-img-top').forEach(img => {
+    img.style.transform = 'rotateX(0) rotateY(0) scale(1)';
+  });
 });
