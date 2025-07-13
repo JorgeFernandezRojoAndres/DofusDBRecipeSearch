@@ -6,6 +6,8 @@ const authRoutes = require('./src/routes/authRoutes');
 const mongoose = require('mongoose');
 const verificarToken = require('./src/middlewares/authMiddleware');
 const blogRoutes = require('./src/routes/blogRoutes');
+const visitasRoutes = require('./src/routes/visitas.routes');
+
 require('dotenv').config();
 
 const app = express();
@@ -23,6 +25,7 @@ app.use(express.json());
 // Rutas
 app.use('/api', blogRoutes);
 app.use('/api', authRoutes);
+app.use('/api', visitasRoutes);
 
 // Conexión MongoDB
 mongoose.connect(process.env.MONGO_URI)

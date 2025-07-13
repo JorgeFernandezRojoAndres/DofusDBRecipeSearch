@@ -16,7 +16,7 @@
   <link rel="canonical" href="https://recetasdofus.com.ar">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Búsqueda de Recetas - DofusDB">
+  <meta property="og:title" content="Búsqueda de Recetas - Recetas Dofus">
   <meta property="og:description" content="Calculá cuánto ganás al fabricar objetos en Dofus.">
   <meta property="og:image" content="https://recetasdofus.com.ar/images/favicon.png">
   <meta property="og:url" content="https://recetasdofus.com.ar">
@@ -34,13 +34,17 @@
    <script src="js/consent-mode.js"></script>
   <script src="js/gtag-config.js"></script>
 </head>
+  <!-- contador de visitas en su propio bloque -->
 
 <body>
+<div class="visit-counter">
+  <span id="contador-visitas">Usuarios hasta el momento: 0</span>
 
+</div>
 <!-- Barra de navegación -->  
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">  
     <div class="container">  
-      <a class="navbar-brand" href="index.html">DofusDB</a>  
+      <a class="navbar-brand" href="index.html">Recetas Dofus</a>  
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">  
         <span class="navbar-toggler-icon"></span>  
       </button>  
@@ -63,9 +67,11 @@
           <button id="btnVolversePremium" class="btn btn-warning me-2" hidden>Volverse Premium</button>  
           <button id="btnBeneficios" class="btn btn-outline-light me-2" hidden>Ver Beneficios Premium</button>  
           <button id="btnLogout" class="btn btn-danger" hidden>Cerrar Sesión</button>  
-        </div>  
+        </div>
+          
       </div>  
-    </div>  
+    </div>
+      
   </nav> 
 <!-- Nueva sección introductoria -->
 <section class="container mt-5 d-flex justify-content-center">
@@ -90,14 +96,19 @@
 <div class="d-flex justify-content-center my-4">
   <!-- anuncio_index_superior -->
   <ins class="adsbygoogle"
-       style="display:block"
+       style="display:block; width: 100%; min-height: 90px"
        data-ad-client="ca-pub-8948109105283119"
        data-ad-slot="9450520549"
        data-ad-format="auto"
        data-full-width-responsive="true"></ins>
-  <script>
-       (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
+</div>
+
+<script>
+  window.addEventListener('load', () => {
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  });
+</script>
+
 </div>
 
 <!-- Contenedor principal -->
@@ -153,10 +164,6 @@
 </section>
 
 </main>
-
-
-
-
 <footer class="text-center mt-5">
   <p>© 2025 Jorge Fernández Rojo Andrés - 
     <a href="mailto:jf_wolf_887@hotmail.com">Contacto</a> | 
@@ -202,7 +209,25 @@
 <script src="js/language-toggle.js"></script>
 <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
 <script src="js/escenaDofus.js"></script>
+<script>
+  function actualizarContadorVisitas() {
+    fetch('/api/visitas')
+      .then(res => res.json())
+      .then(data => {
+        const contador = document.getElementById('contador-visitas');
+        if (contador) {
+          contador.textContent = `Usuarios hasta el momento: ${data.total}`;
+        }
+      })
+      .catch(err => console.error('Error al cargar las visitas:', err));
+  }
 
+  // Ejecutar al cargar
+  actualizarContadorVisitas();
+
+  // Actualizar cada 30 segundos
+  setInterval(actualizarContadorVisitas, 30000);
+</script>
 
 </body>
 </html>

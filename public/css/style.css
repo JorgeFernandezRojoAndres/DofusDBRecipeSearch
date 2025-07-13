@@ -184,6 +184,19 @@ input {
   font-style: italic;
   margin-bottom: 8px;
 }
+.visit-counter {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background-color: #222;
+  color: #fff;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 2px 5px rgb(255, 255, 255);
+  z-index: 1000;
+}
 
 @media (max-width: 768px) {
   .container {
