@@ -1,0 +1,133 @@
+/* ============================================================
+   DOFUSDB - Estilos Base
+   El diseño principal se maneja via Tailwind + design-system.css
+   ============================================================ */
+
+/* Body: fondo Dofus */
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url("../images/fondooficion.JPG");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* Visit Counter - Fixed top right, below header */
+.visit-counter {
+  position: fixed;
+  top: 4.5rem;
+  right: 1rem;
+  background-color: rgba(14, 14, 14, 0.85);
+  backdrop-filter: blur(4px);
+  color: #e5e2e1;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-family: 'JetBrains Mono', monospace;
+  border: 1px solid #4e4639;
+  z-index: 40;
+  letter-spacing: 0.05em;
+}
+
+/* Titulo grueso - Calculadora */
+.titulo-grueso {
+  font-weight: 700;
+  -webkit-text-stroke: 2px #e9c176;
+  paint-order: stroke fill;
+  color: #000;
+  text-shadow:
+    -2px -2px 0 #e9c176,
+     2px -2px 0 #e9c176,
+    -2px  2px 0 #e9c176,
+     2px  2px 0 #e9c176,
+    -1px -1px 0 #000,
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000;
+}
+
+/* Subtitulo con contraste */
+.subtitulo-contraste {
+  text-shadow:
+    -1px -1px 0 #000,
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000,
+    -1px  0px 0 #000,
+     1px  0px 0 #000,
+     0px -1px 0 #000,
+     0px  1px 0 #000;
+}
+
+/* Blog: Card container */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Blog: Pagination */
+#paginacion .page-link {
+  color: #e9c176;
+  font-weight: 600;
+  background-color: #121212;
+  border: 1px solid #4e4639;
+  font-family: 'JetBrains Mono', monospace;
+  transition: all 0.2s ease-in-out;
+}
+#paginacion .page-link:hover {
+  background-color: #1c1b1b;
+  color: #ffdea5;
+  border-color: #e9c176;
+}
+#paginacion .active .page-link {
+  background-color: #e9c176;
+  border-color: #e9c176;
+  color: #0A0A0A;
+}
+
+/* Three.js container */
+#threeContainer {
+  width: 100%;
+  height: 400px;
+}
+
+/* Modal Bootstrap overrides for dark theme */
+.modal-content {
+  background-color: #121212 !important;
+  border: 1px solid #4e4639 !important;
+  color: #e5e2e1 !important;
+}
+.modal-header {
+  border-bottom: 1px solid #4e4639 !important;
+}
+.modal-footer {
+  border-top: 1px solid #4e4639 !important;
+}
+.btn-close {
+  filter: invert(0.8) sepia(0.3) hue-rotate(350deg) !important;
+}
+
+/* Cookie banner dark mode */
+.cc-window {
+  background-color: #121212 !important;
+  color: #e5e2e1 !important;
+  border: 1px solid #4e4639 !important;
+}
+
+/* AdSense block spacing */
+.adsense-block {
+  min-height: 90px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .visit-counter {
+    top: 4.5rem;
+    right: 0.5rem;
+    font-size: 0.65rem;
+  }
+}

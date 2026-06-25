@@ -1,0 +1,28 @@
+{
+  "name": "dofusdb-recipe-search",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@vitalets/google-translate-api": "^9.2.1",
+    "axios": "^1.9.0",
+    "bcryptjs": "^3.0.2",
+    "cheerio": "^1.0.0",
+    "dotenv": "^16.5.0",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.15.1",
+    "node-fetch": "^2.7.0",
+    "nodemailer": "^6.10.1",
+    "puppeteer": "^23.10.1",
+    "sib-api-v3-sdk": "^8.5.0"
+  }
+}

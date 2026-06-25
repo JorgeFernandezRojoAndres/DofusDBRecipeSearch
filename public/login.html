@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+  <!-- Google Fonts -->
+  <style>
+    @font-face { font-family: 'Cinzel'; font-style: normal; font-weight: 400; font-display: swap; src: url(https://fonts.gstatic.com/s/cinzel/v26/8vIU7ww63mVu7gtR-kwKxNvkNOjw-tbnTYo.ttf) format('truetype'); }
+    @font-face { font-family: 'Cinzel'; font-style: normal; font-weight: 600; font-display: swap; src: url(https://fonts.gstatic.com/s/cinzel/v26/8vIU7ww63mVu7gtR-kwKxNvkNOjw-gjgTYo.ttf) format('truetype'); }
+    @font-face { font-family: 'Cinzel'; font-style: normal; font-weight: 700; font-display: swap; src: url(https://fonts.gstatic.com/s/cinzel/v26/8vIU7ww63mVu7gtR-kwKxNvkNOjw-jHgTYo.ttf) format('truetype'); }
+    @font-face { font-family: 'Hanken Grotesk'; font-style: normal; font-weight: 400; font-display: swap; src: url(https://fonts.gstatic.com/s/hankengrotesk/v12/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_Ncs2Za4Q.ttf) format('truetype'); }
+    @font-face { font-family: 'Hanken Grotesk'; font-style: normal; font-weight: 500; font-display: swap; src: url(https://fonts.gstatic.com/s/hankengrotesk/v12/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_NcgWZa4Q.ttf) format('truetype'); }
+    @font-face { font-family: 'Hanken Grotesk'; font-style: normal; font-weight: 600; font-display: swap; src: url(https://fonts.gstatic.com/s/hankengrotesk/v12/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_NcbWFa4Q.ttf) format('truetype'); }
+    @font-face { font-family: 'Hanken Grotesk'; font-style: normal; font-weight: 700; font-display: swap; src: url(https://fonts.gstatic.com/s/hankengrotesk/v12/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_NcVGFa4Q.ttf) format('truetype'); }
+    @font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxjPQ.ttf) format('truetype'); }
+    @font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 500; font-display: swap; src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8-qxjPQ.ttf) format('truetype'); }
+    @font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 700; font-display: swap; src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8L6tjPQ.ttf) format('truetype'); }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,0" rel="stylesheet">
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Iniciar Sesión - DofusDB</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="icon" href="images/favicon.png" type="image/png">
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {"on-secondary":"#412d02","surface-container-highest":"#353534","tertiary-fixed-dim":"#bdcbac","background":"#0A0A0A","on-tertiary-fixed-variant":"#3e4b32","on-surface-variant":"#d1c5b4","error":"#ffb4ab","surface-bright":"#393939","surface-variant":"#353534","secondary-fixed":"#ffdea9","error-container":"#93000a","primary-fixed":"#ffdea5","on-tertiary-container":"#333f27","tertiary":"#bdcbac","secondary-fixed-dim":"#e4c289","on-background":"#e5e2e1","primary-container":"#c5a059","on-primary-container":"#4e3700","secondary-container":"#5d4518","on-error-container":"#ffdad6","inverse-surface":"#e5e2e1","on-secondary-fixed":"#271900","surface-container":"#201f1f","primary-fixed-dim":"#e9c176","on-surface":"#e5e2e1","tertiary-container":"#9caa8c","surface":"#121212","on-tertiary-fixed":"#141f0a","on-secondary-container":"#d5b47c","on-primary":"#412d00","surface-tint":"#e9c176","on-error":"#690005","inverse-on-surface":"#313030","on-tertiary":"#28341d","surface-container-low":"#1c1b1b","on-primary-fixed-variant":"#5d4201","primary":"#e9c176","outline":"#9a8f80","secondary":"#e4c289","outline-variant":"#4e4639","surface-container-high":"#2a2a2a","surface-dim":"#131313","on-primary-fixed":"#261900","surface-container-lowest":"#0e0e0e","on-secondary-fixed-variant":"#5a4316","inverse-primary":"#775a19","tertiary-fixed":"#d9e8c6"},
+          borderRadius: { DEFAULT: "2px", lg: "4px", xl: "8px", full: "12px" },
+          spacing: { gutter: "20px", "margin-desktop": "40px", "margin-mobile": "16px", xs: "4px", xl: "80px", lg: "48px", base: "8px", md: "24px", sm: "12px" },
+          fontFamily: {"titular-xl":["Cinzel"],"titular-lg":["Cinzel"],"titular-md":["Cinzel"],"cuerpo-lg":["Hanken Grotesk"],"cuerpo-md":["Hanken Grotesk"],"etiqueta-sm":["Hanken Grotesk"],"dato-num":["Hanken Grotesk"]},
+          fontSize: {"titular-xl":["48px",{lineHeight:"1.2",letterSpacing:"0.05em",fontWeight:"700"}],"titular-lg":["32px",{lineHeight:"1.3",fontWeight:"600"}],"titular-md":["24px",{lineHeight:"1.4",fontWeight:"600"}],"cuerpo-lg":["18px",{lineHeight:"1.6",fontWeight:"400"}],"cuerpo-md":["16px",{lineHeight:"1.6",fontWeight:"400"}],"etiqueta-sm":["14px",{lineHeight:"1.2",fontWeight:"600"}],"dato-num":["14px",{lineHeight:"1",fontWeight:"700"}]}
+        }
+      }
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+</head>
+<body class="min-h-screen flex items-center justify-center relative font-cuerpo-md text-on-surface overflow-hidden">
+  <!-- Background Layer (imagen local) -->
+  <div class="fixed inset-0 z-0">
+    <img class="w-full h-full object-cover opacity-40" src="images/fondooficion.JPG" alt="" />
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+  </div>
+
+  <!-- Atmospheric Particles -->
+  <div class="fixed inset-0 pointer-events-none" id="particles-container"></div>
+
+  <!-- Login Container -->
+  <main class="relative z-10 w-full max-w-[440px] px-margin-mobile">
+    <!-- Brand Identity -->
+    <div class="text-center mb-8">
+      <h1 class="font-titular-xl text-titular-xl text-primary drop-shadow-[0_0_10px_rgba(233,193,118,0.3)] tracking-widest uppercase">
+        DofusDB
+      </h1>
+      <p class="font-etiqueta-sm text-etiqueta-sm text-primary-fixed-dim/60 tracking-[0.2em] uppercase mt-2">
+        El Legado del Artesano
+      </p>
+    </div>
+
+    <!-- Auth Card -->
+    <div class="glass-panel rounded-xl overflow-hidden transition-all duration-300">
+      <!-- Tabs -->
+      <nav class="flex border-b border-outline-variant/30">
+        <button class="flex-1 py-4 font-etiqueta-sm text-etiqueta-sm uppercase tracking-wider transition-all duration-300 active-tab" id="tab-login" onclick="toggleAuth('login')">
+          Iniciar Sesión
+        </button>
+        <button class="flex-1 py-4 font-etiqueta-sm text-etiqueta-sm uppercase tracking-wider text-on-surface-variant hover:text-primary transition-all duration-300" id="tab-register" onclick="toggleAuth('register')">
+          Crear Cuenta
+        </button>
+      </nav>
+
+      <div class="p-6">
+        <!-- Login Form -->
+        <form class="space-y-5 block" id="form-login">
+          <div class="space-y-2">
+            <label class="font-etiqueta-sm text-etiqueta-sm text-on-surface-variant block ml-1 uppercase tracking-tighter">Usuario o Correo Electrónico</label>
+            <div class="relative group">
+              <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary/40 group-focus-within:text-primary transition-colors">person</span>
+              <input id="login-email" type="email" class="w-full bg-surface-container-lowest border-b-2 border-outline-variant/50 focus:border-primary px-10 py-3 text-on-surface placeholder:text-on-surface-variant/30 rounded-t-lg transition-all focus:outline-none font-cuerpo-md" placeholder="Ingresa tu identidad..." required>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <div class="flex justify-between items-center px-1">
+              <label class="font-etiqueta-sm text-etiqueta-sm text-on-surface-variant uppercase tracking-tighter">Contraseña</label>
+              <a href="recuperar.html" class="text-[12px] text-primary/60 hover:text-primary transition-colors font-etiqueta-sm">¿Olvidaste tu llave?</a>
+            </div>
+            <div class="relative group">
+              <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary/40 group-focus-within:text-primary transition-colors">key</span>
+              <input id="login-password" type="password" class="w-full bg-surface-container-lowest border-b-2 border-outline-variant/50 focus:border-primary px-10 py-3 text-on-surface placeholder:text-on-surface-variant/30 rounded-t-lg transition-all focus:outline-none font-cuerpo-md" placeholder="••••••••" required>
+            </div>
+          </div>
+          <div class="flex items-center space-x-2 px-1">
+            <input class="w-4 h-4 rounded border-outline-variant bg-surface-container-lowest text-primary focus:ring-primary/20" id="remember" type="checkbox">
+            <label class="text-[12px] text-on-surface-variant cursor-pointer select-none" for="remember">Mantener sesión iniciada</label>
+          </div>
+          <button type="submit" class="w-full bg-primary py-4 px-6 rounded-lg text-on-primary font-bold font-etiqueta-sm text-etiqueta-sm uppercase tracking-widest btn-glow transition-all active:scale-95 flex items-center justify-center gap-2 group">
+            <span>Ingresar al Mundo</span>
+            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">bolt</span>
+          </button>
+        </form>
+
+        <!-- Register Form -->
+        <form class="space-y-4 hidden" id="form-register">
+          <div class="space-y-2">
+            <label class="font-etiqueta-sm text-etiqueta-sm text-on-surface-variant block ml-1 uppercase tracking-tighter">Nombre de Usuario</label>
+            <input type="text" class="w-full bg-surface-container-lowest border-b-2 border-outline-variant/50 focus:border-primary px-4 py-3 text-on-surface placeholder:text-on-surface-variant/30 rounded-t-lg transition-all focus:outline-none font-cuerpo-md" placeholder="Ej: MaestroForjador" required>
+          </div>
+          <div class="space-y-2">
+            <label class="font-etiqueta-sm text-etiqueta-sm text-on-surface-variant block ml-1 uppercase tracking-tighter">Correo Electrónico</label>
+            <input type="email" class="w-full bg-surface-container-lowest border-b-2 border-outline-variant/50 focus:border-primary px-4 py-3 text-on-surface placeholder:text-on-surface-variant/30 rounded-t-lg transition-all focus:outline-none font-cuerpo-md" placeholder="aventurero@ejemplo.com" required>
+          </div>
+          <div class="space-y-2">
+            <label class="font-etiqueta-sm text-etiqueta-sm text-on-surface-variant block ml-1 uppercase tracking-tighter">Contraseña</label>
+            <input type="password" class="w-full bg-surface-container-lowest border-b-2 border-outline-variant/50 focus:border-primary px-4 py-3 text-on-surface placeholder:text-on-surface-variant/30 rounded-t-lg transition-all focus:outline-none font-cuerpo-md" placeholder="Mínimo 8 caracteres" required>
+          </div>
+          <div class="space-y-2">
+            <label class="font-etiqueta-sm text-etiqueta-sm text-on-surface-variant block ml-1 uppercase tracking-tighter">Confirmar Contraseña</label>
+            <input type="password" class="w-full bg-surface-container-lowest border-b-2 border-outline-variant/50 focus:border-primary px-4 py-3 text-on-surface placeholder:text-on-surface-variant/30 rounded-t-lg transition-all focus:outline-none font-cuerpo-md" placeholder="Repite tu clave" required>
+          </div>
+          <button type="submit" class="w-full bg-primary py-4 px-6 rounded-lg text-on-primary font-bold font-etiqueta-sm text-etiqueta-sm uppercase tracking-widest btn-glow transition-all active:scale-95 mt-2">
+            Comenzar Aventura
+          </button>
+        </form>
+
+        <pre id="resultado" class="font-etiqueta-sm text-etiqueta-sm text-center mt-4"></pre>
+      </div>
+
+      <!-- Footer -->
+      <div class="bg-surface-container-low/50 py-4 px-6 border-t border-outline-variant/10 text-center">
+        <p class="text-[11px] text-on-surface-variant/40 font-etiqueta-sm uppercase tracking-tighter">Al ingresar aceptas los <a href="terminos.html" class="text-primary/60 hover:text-primary transition-colors">Términos del Gremio</a> y la <a href="privacidad.html" class="text-primary/60 hover:text-primary transition-colors">Política de Secretos</a>.</p>
+      </div>
+    </div>
+
+    <!-- Social Login -->
+    <div class="mt-6 flex items-center justify-center gap-6">
+      <span class="h-[1px] flex-1 bg-gradient-to-r from-transparent to-outline-variant/30"></span>
+      <p class="font-etiqueta-sm text-etiqueta-sm text-on-surface-variant/40 uppercase tracking-widest">O entrar con</p>
+      <span class="h-[1px] flex-1 bg-gradient-to-l from-transparent to-outline-variant/30"></span>
+    </div>
+    <div class="mt-4 flex justify-center gap-4">
+      <button class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center border border-outline-variant/20 hover:border-primary/50 transition-all group">
+        <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">google</span>
+      </button>
+      <button class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center border border-outline-variant/20 hover:border-primary/50 transition-all group">
+        <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">social_leaderboard</span>
+      </button>
+      <button class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center border border-outline-variant/20 hover:border-primary/50 transition-all group">
+        <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">gamepad</span>
+      </button>
+    </div>
+  </main>
+
+  <script>
+    // Tab toggle
+    function toggleAuth(type) {
+      const loginTab = document.getElementById('tab-login');
+      const registerTab = document.getElementById('tab-register');
+      const loginForm = document.getElementById('form-login');
+      const registerForm = document.getElementById('form-register');
+
+      if (type === 'login') {
+        loginTab.classList.add('active-tab', 'text-primary');
+        loginTab.classList.remove('text-on-surface-variant');
+        registerTab.classList.remove('active-tab', 'text-primary');
+        registerTab.classList.add('text-on-surface-variant');
+        loginForm.classList.remove('hidden');
+        loginForm.classList.add('block');
+        registerForm.classList.add('hidden');
+        registerForm.classList.remove('block');
+      } else {
+        registerTab.classList.add('active-tab', 'text-primary');
+        registerTab.classList.remove('text-on-surface-variant');
+        loginTab.classList.remove('active-tab', 'text-primary');
+        loginTab.classList.add('text-on-surface-variant');
+        registerForm.classList.remove('hidden');
+        registerForm.classList.add('block');
+        loginForm.classList.add('hidden');
+        loginForm.classList.remove('block');
+      }
+    }
+
+    // Particles
+    const container = document.getElementById('particles-container');
+    for (let i = 0; i < 20; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.animationDelay = Math.random() * 10 + 's';
+      p.style.opacity = Math.random() * 0.3;
+      container.appendChild(p);
+    }
+
+    // Login form submit (funcionalidad real)
+    const loginForm = document.getElementById('form-login');
+    const resultado = document.getElementById('resultado');
+
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+
+      const btn = loginForm.querySelector('button[type="submit"]');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<span class="animate-spin material-symbols-outlined">progress_activity</span>';
+      btn.disabled = true;
+
+      try {
+        const response = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await response.json();
+
+        if (data.token) {
+          localStorage.setItem('jwtToken', data.token);
+          resultado.textContent = '✅ Acceso Concedido. Redirigiendo...';
+          resultado.className = 'font-etiqueta-sm text-etiqueta-sm text-center mt-4 text-tertiary';
+          setTimeout(() => window.location.href = 'index.html', 1000);
+        } else {
+          resultado.textContent = '❌ Error: ' + (data.error || 'Credenciales inválidas');
+          resultado.className = 'font-etiqueta-sm text-etiqueta-sm text-center mt-4 text-error';
+          btn.innerHTML = originalText;
+          btn.disabled = false;
+        }
+      } catch (error) {
+        resultado.textContent = '❌ Error en la conexión con el servidor.';
+        resultado.className = 'font-etiqueta-sm text-etiqueta-sm text-center mt-4 text-error';
+        console.error(error);
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }
+    });
+
+    // Register tab form (redirect to register.html for actual registration)
+    document.getElementById('form-register').addEventListener('submit', (e) => {
+      e.preventDefault();
+      window.location.href = 'register.html';
+    });
+  </script>
+</body>
+</html>

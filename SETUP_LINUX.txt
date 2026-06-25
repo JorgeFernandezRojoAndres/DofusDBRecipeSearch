@@ -1,0 +1,66 @@
+================================================
+  DofusDB Recipe Search - Guia de Instalacion
+  Para tu mini PC Linux (192.168.1.38)
+================================================
+
+PASO 1: Instalar Node.js (si no esta instalado)
+------------------------------------------------
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+Verificar: node --version  (debe mostrar v18+)
+
+
+PASO 2: Entrar al directorio del proyecto
+------------------------------------------
+cd /home/adminauro/DofusDBRecipeSearch-main
+
+
+PASO 3: Crear el archivo .env
+------------------------------
+cp .env.example .env
+nano .env
+
+Rellena los valores:
+- MONGO_URI = tu cadena de conexion a MongoDB Atlas
+- JWT_SECRET = una frase secreta (cualquiera sirve)
+- GMAIL_USER = tu email
+- GMAIL_PASS = contraseña de aplicacion de Gmail
+
+
+PASO 4: Instalar dependencias
+------------------------------
+# Instalar pnpm (mas seguro que npm)
+npm install -g pnpm
+
+# Instalar dependencias del proyecto
+pnpm install
+
+
+PASO 5: Instalar PM2 globalmente
+---------------------------------
+sudo pnpm install -g pm2
+
+
+PASO 6: Iniciar el servidor
+-----------------------------
+mkdir -p logs
+pm2 start ecosystem.config.js
+pm2 save
+
+
+PASO 7: Hacer que inicie con el sistema
+-----------------------------------------
+sudo env PATH=$PATH:$(npm config get prefix)/bin pm2 startup systemd -u $USER --hp $HOME
+pm2 save
+
+¡Listo! Tu servidor estara corriendo 24/7 en:
+http://192.168.1.38:3000
+
+
+COMANDOS UTILES
+----------------
+pm2 status              -> Ver estado del servidor
+pm2 logs dofusdb-recipes -> Ver logs en tiempo real
+pm2 restart dofusdb-recipes -> Reiniciar
+pm2 stop dofusdb-recipes    -> Detener

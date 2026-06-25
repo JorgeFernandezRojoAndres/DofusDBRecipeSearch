@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&amp;family=Hanken+Grotesk:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "primary-fixed-dim": "#e9c176",
+                "tertiary": "#bdcbac",
+                "surface-container-high": "#2a2a2b",
+                "tertiary-container": "#9caa8c",
+                "on-primary": "#412d00",
+                "on-secondary": "#3c2f00",
+                "primary-fixed": "#ffdea5",
+                "on-tertiary-container": "#333f27",
+                "secondary-container": "#af8d11",
+                "secondary-fixed-dim": "#e9c349",
+                "primary": "#e9c176",
+                "surface-container": "#201f20",
+                "on-primary-fixed": "#261900",
+                "surface-container-low": "#1c1b1c",
+                "on-secondary-container": "#342800",
+                "on-surface-variant": "#d1c5b4",
+                "on-surface": "#e5e2e3",
+                "on-primary-container": "#4e3700",
+                "on-tertiary-fixed-variant": "#3e4b32",
+                "surface-container-highest": "#353436",
+                "outline": "#9a8f80",
+                "inverse-on-surface": "#313031",
+                "surface-dim": "#131314",
+                "background": "#131314",
+                "secondary-fixed": "#ffe088",
+                "secondary": "#e9c349",
+                "surface": "#131314",
+                "surface-bright": "#39393a",
+                "tertiary-fixed-dim": "#bdcbac",
+                "on-tertiary": "#28341d",
+                "tertiary-fixed": "#d9e8c6",
+                "inverse-surface": "#e5e2e3",
+                "on-primary-fixed-variant": "#5d4201",
+                "surface-tint": "#e9c176",
+                "on-error-container": "#ffdad6",
+                "surface-variant": "#353436",
+                "surface-container-lowest": "#0e0e0f",
+                "error": "#ffb4ab",
+                "on-background": "#e5e2e3",
+                "on-secondary-fixed": "#241a00",
+                "on-tertiary-fixed": "#141f0a",
+                "inverse-primary": "#775a19",
+                "on-error": "#690005",
+                "on-secondary-fixed-variant": "#574500",
+                "error-container": "#93000a",
+                "primary-container": "#c5a059",
+                "outline-variant": "#4e4639"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "spacing": {
+                "rejilla-hueco": "1.5rem",
+                "unidad-base": "4px",
+                "margen-lg": "2rem",
+                "espaciado-seccion": "4rem",
+                "margen-md": "1rem",
+                "margen-xs": "0.5rem"
+            },
+            "fontFamily": {
+                "cuerpo-lg": ["Hanken Grotesk"],
+                "dato-num": ["Hanken Grotesk"],
+                "titular-xl": ["Cinzel"],
+                "titular-md": ["Cinzel"],
+                "titular-lg": ["Cinzel"],
+                "etiqueta-sm": ["Hanken Grotesk"],
+                "cuerpo-md": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                "cuerpo-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                "dato-num": ["14px", {"lineHeight": "1", "fontWeight": "700"}],
+                "titular-xl": ["48px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                "titular-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                "titular-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                "etiqueta-sm": ["14px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                "cuerpo-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0F0F10;
+            color: #e5e2e3;
+        }
+        .glass-panel {
+            background: rgba(28, 27, 28, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(233, 193, 118, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+        }
+        .metallic-border {
+            border-bottom: 1px solid #e9c176;
+        }
+        .oro-glow:hover {
+            box-shadow: 0 0 15px rgba(233, 193, 118, 0.4);
+            background-color: #ffdea5 !important;
+        }
+        .background-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBoMnx4yy9vImDg5p7kH5iZbrHh1F40pdmjdzhJaZxrnQBD0AU9XxWRzX_7eed9YqSDAHrCwreY-MGWy2sK2vWUyzvlGkCDKvHybutZFLO0GLm-9nXCU2pj_9UjP_NPFFfstzHl2InsiSyycZj1sa_b4DrSyLiytcEDXebUawrXWvASESLMfh0-SnFiCHHMz3ctzLfYXBIB7ZTqxSZRwT3-mhDPkOptyAT360_vBG7khAx2Jkl1Fsch9fbuXIL7iJaNVeWrD3Npl_0');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            mix-blend-mode: multiply;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="font-cuerpo-md text-cuerpo-md antialiased" style="background-image: linear-gradient(rgba(19, 19, 20, 0.7), rgba(19, 19, 20, 0.7)), url('https://lh3.googleusercontent.com/aida-public/AB6AXuCrM3zO4HloHhwnh46vcYacBokxG7Pq2rUTm8iHY7e6AN9Do9uCQhSdkLxqRWOmMhOnBIGKassM0LRcsq3fSWGJdNx2AdCJRSZaIvKrCxCt4Pxk7CItu1EBOPmPw3vZdGUgsV69x1wRHEItdww53xoLesh_nFf0R-Fhx7fHrp5f7jltSPrmAoKXmYCeZWyKqZMwqxdNAVMEb8zFTKUlgFcdz4jEOEJ3s17W4azhiTrZmpx3xkkU93gFkeMFmOjubno6nw4dQ6LpXoA'); background-attachment: fixed; background-position: center; background-size: cover; background-repeat: no-repeat;">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-surface-container/80 backdrop-blur-xl border-b border-primary/20 shadow-[0_0_15px_rgba(212,175,55,0.1)]">
+<div class="flex justify-between items-center w-full px-margen-md max-w-[1440px] mx-auto h-16">
+<div class="flex items-center gap-8">
+<span class="font-titular-md text-titular-md font-bold text-primary">DofusDB</span>
+<nav class="hidden md:flex items-center gap-6">
+<a class="font-etiqueta-sm text-etiqueta-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Recetas</a>
+<a class="font-etiqueta-sm text-etiqueta-sm text-primary border-b-2 border-primary pb-1" href="#">Calculadora de Oficios</a>
+<a class="font-etiqueta-sm text-etiqueta-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Top Recetas</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<input class="bg-surface-container-highest border-none rounded-full px-4 py-1 text-etiqueta-sm focus:ring-1 focus:ring-primary w-48" placeholder="Buscar..." type="text"/>
+</div>
+<button class="material-symbols-outlined text-primary hover:scale-110 transition-transform">person</button>
+</div>
+</div>
+</header>
+<main class="max-w-[1440px] mx-auto pt-24 pb-12 px-margen-md">
+<header class="mb-10 text-center md:text-left">
+<h1 class="font-titular-xl text-titular-xl text-primary mb-2">Calculadora de Oficios y Precios</h1>
+<p class="font-cuerpo-lg text-cuerpo-lg text-on-surface-variant max-w-2xl">Optimiza tu producción de artesanía analizando costes de mercado y beneficios proyectados en tiempo real.</p>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-rejilla-hueco items-start">
+<!-- Left Column: Lista de Ingredientes -->
+<section class="lg:col-span-8 space-y-6">
+<div class="glass-panel p-margen-md rounded-xl">
+<div class="flex items-center justify-between mb-6">
+<h2 class="font-titular-md text-titular-md text-primary">Lista de Ingredientes</h2>
+<span class="text-etiqueta-sm text-on-surface-variant italic">Receta: Espada Real del Jalató</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-separate border-spacing-y-2">
+<thead>
+<tr class="text-on-surface-variant font-etiqueta-sm uppercase tracking-wider">
+<th class="pb-4 px-2">Item</th>
+<th class="pb-4 px-2">Precio Unitario</th>
+<th class="pb-4 px-2 text-center">Cantidad</th>
+<th class="pb-4 px-2 text-right">Subtotal</th>
+</tr>
+</thead>
+<tbody id="ingredient-list">
+<!-- Row 1 -->
+<tr class="bg-surface-container-low/50 hover:bg-surface-container-highest transition-colors group">
+<td class="py-4 px-2 flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container-high rounded border border-primary/20 flex items-center justify-center p-1">
+<span class="material-symbols-outlined text-primary">iron</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Hierro</p>
+<p class="text-[10px] text-primary/60 uppercase">Minero Nv. 1</p>
+</div>
+</td>
+<td class="py-4 px-2">
+<div class="flex items-center border-b border-outline-variant/30 focus-within:border-primary transition-all">
+<input class="bg-transparent border-none p-0 text-primary w-20 focus:ring-0 font-dato-num" oninput="calculateRow(this)" type="number" value="45"/>
+<span class="text-xs text-on-surface-variant ml-1">k</span>
+</div>
+</td>
+<td class="py-4 px-2 text-center">
+<span class="font-dato-num text-on-surface bg-surface-container-highest px-3 py-1 rounded-full border border-outline-variant/20">10</span>
+</td>
+<td class="py-4 px-2 text-right">
+<span class="font-dato-num text-primary-fixed-dim subtotal">450 k</span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="bg-surface-container-low/50 hover:bg-surface-container-highest transition-colors group">
+<td class="py-4 px-2 flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container-high rounded border border-primary/20 flex items-center justify-center p-1">
+<span class="material-symbols-outlined text-primary">forest</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Madera de Fresno</p>
+<p class="text-[10px] text-primary/60 uppercase">Leñador Nv. 1</p>
+</div>
+</td>
+<td class="py-4 px-2">
+<div class="flex items-center border-b border-outline-variant/30 focus-within:border-primary transition-all">
+<input class="bg-transparent border-none p-0 text-primary w-20 focus:ring-0 font-dato-num" oninput="calculateRow(this)" type="number" value="120"/>
+<span class="text-xs text-on-surface-variant ml-1">k</span>
+</div>
+</td>
+<td class="py-4 px-2 text-center">
+<span class="font-dato-num text-on-surface bg-surface-container-highest px-3 py-1 rounded-full border border-outline-variant/20">5</span>
+</td>
+<td class="py-4 px-2 text-right">
+<span class="font-dato-num text-primary-fixed-dim subtotal">600 k</span>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="bg-surface-container-low/50 hover:bg-surface-container-highest transition-colors group">
+<td class="py-4 px-2 flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container-high rounded border border-primary/20 flex items-center justify-center p-1">
+<span class="material-symbols-outlined text-primary">category</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Piel de Jalató</p>
+<p class="text-[10px] text-primary/60 uppercase">Botín Combate</p>
+</div>
+</td>
+<td class="py-4 px-2">
+<div class="flex items-center border-b border-outline-variant/30 focus-within:border-primary transition-all">
+<input class="bg-transparent border-none p-0 text-primary w-20 focus:ring-0 font-dato-num" oninput="calculateRow(this)" type="number" value="2500"/>
+<span class="text-xs text-on-surface-variant ml-1">k</span>
+</div>
+</td>
+<td class="py-4 px-2 text-center">
+<span class="font-dato-num text-on-surface bg-surface-container-highest px-3 py-1 rounded-full border border-outline-variant/20">1</span>
+</td>
+<td class="py-4 px-2 text-right">
+<span class="font-dato-num text-primary-fixed-dim subtotal">2500 k</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<button class="mt-8 flex items-center gap-2 text-primary hover:text-primary-fixed transition-colors font-etiqueta-sm">
+<span class="material-symbols-outlined">add_circle</span>
+                        Añadir ingrediente personalizado
+                    </button>
+</div>
+</section>
+<!-- Right Column: Sticky Resumen de Costes -->
+<aside class="lg:col-span-4 lg:sticky lg:top-24 space-y-6">
+<div class="glass-panel p-margen-md rounded-xl border-primary/40 relative overflow-hidden">
+<div class="absolute -right-4 -top-4 opacity-5 pointer-events-none">
+<span class="material-symbols-outlined text-[120px]" style="font-variation-settings: 'FILL' 1;">calculate</span>
+</div>
+<h2 class="font-titular-md text-titular-md text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined">analytics</span>
+                        Resumen de Costes
+                    </h2>
+<div class="space-y-6">
+<div class="flex justify-between items-end pb-4 border-b border-outline-variant/20">
+<div>
+<p class="text-etiqueta-sm text-on-surface-variant">Costo Total de Fabricación</p>
+<p class="text-xs text-primary/60">Suma de ingredientes</p>
+</div>
+<span class="font-dato-num text-titular-md text-on-surface" id="total-cost">3550 k</span>
+</div>
+<div class="space-y-2">
+<label class="text-etiqueta-sm text-on-surface-variant">Precio de Venta Estimado</label>
+<div class="flex items-center bg-surface-container-lowest border border-outline-variant/30 rounded-lg p-3 focus-within:border-primary transition-all">
+<input class="bg-transparent border-none p-0 text-primary w-full focus:ring-0 font-dato-num text-xl" id="selling-price" oninput="calculateProfit()" type="number" value="12000"/>
+<span class="text-primary font-dato-num ml-2">Kamas</span>
+</div>
+</div>
+<div class="p-6 bg-surface-container-highest rounded-xl border border-primary/10 flex flex-col items-center justify-center text-center gap-2 shadow-inner">
+<p class="text-etiqueta-sm text-on-surface-variant uppercase tracking-tighter">Beneficio Neto Estimado</p>
+<span class="font-titular-lg text-titular-lg text-tertiary drop-shadow-[0_0_10px_rgba(189,203,172,0.3)]" id="net-profit">+8,450 k</span>
+<div class="w-full bg-surface-container-low h-1 rounded-full mt-4 overflow-hidden">
+<div class="h-full bg-tertiary w-[70%] transition-all duration-700" id="profit-bar"></div>
+</div>
+</div>
+<button class="w-full bg-primary py-4 px-6 rounded-lg font-titular-md text-on-primary font-bold shadow-lg oro-glow transition-all active:scale-95 flex items-center justify-center gap-3">
+<span class="material-symbols-outlined">save</span>
+                            Guardar Cálculo
+                        </button>
+<p class="text-[11px] text-center text-on-surface-variant italic">Este cálculo se almacenará en tu historial de artesano para futuras consultas de mercado.</p>
+</div>
+</div>
+<!-- Secondary Quick Actions -->
+<div class="grid grid-cols-2 gap-4">
+<button class="glass-panel p-3 rounded-lg flex flex-col items-center gap-1 hover:border-primary transition-all group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">share</span>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant">Compartir</span>
+</button>
+<button class="glass-panel p-3 rounded-lg flex flex-col items-center gap-1 hover:border-primary transition-all group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">picture_as_pdf</span>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant">Exportar</span>
+</button>
+</div>
+</aside>
+</div>
+</main>
+<footer class="mt-20 border-t border-primary/10 bg-surface-container-low py-12 px-margen-md">
+<div class="max-w-[1440px] mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="text-center md:text-left">
+<span class="font-titular-md text-primary block mb-2">DofusDB</span>
+<p class="text-xs text-on-surface-variant">Herramienta no oficial. Dofus es una marca registrada de Ankama Games.</p>
+</div>
+<div class="flex gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors text-xs" href="#">Aviso Legal</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-xs" href="#">Privacidad</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-xs" href="#">Soporte</a>
+</div>
+</div>
+</footer>
+<script>
+        function calculateRow(input) {
+            const row = input.closest('tr');
+            const price = parseFloat(input.value) || 0;
+            const quantityText = row.querySelector('.rounded-full').textContent;
+            const quantity = parseInt(quantityText) || 0;
+            const subtotalEl = row.querySelector('.subtotal');
+            
+            const subtotal = price * quantity;
+            subtotalEl.textContent = `${subtotal.toLocaleString()} k`;
+            
+            updateTotal();
+        }
+
+        function updateTotal() {
+            const subtotals = document.querySelectorAll('.subtotal');
+            let total = 0;
+            subtotals.forEach(el => {
+                const val = parseInt(el.textContent.replace(/[^0-9]/g, '')) || 0;
+                total += val;
+            });
+            
+            document.getElementById('total-cost').textContent = `${total.toLocaleString()} k`;
+            calculateProfit();
+        }
+
+        function calculateProfit() {
+            const totalCost = parseInt(document.getElementById('total-cost').textContent.replace(/[^0-9]/g, '')) || 0;
+            const sellingPrice = parseInt(document.getElementById('selling-price').value) || 0;
+            const profitEl = document.getElementById('net-profit');
+            const profitBar = document.getElementById('profit-bar');
+            
+            const profit = sellingPrice - totalCost;
+            
+            if (profit >= 0) {
+                profitEl.textContent = `+${profit.toLocaleString()} k`;
+                profitEl.classList.remove('text-error');
+                profitEl.classList.add('text-tertiary');
+                profitBar.classList.remove('bg-error');
+                profitBar.classList.add('bg-tertiary');
+                
+                // Calculate percentage for visual bar
+                const percentage = Math.min((profit / sellingPrice) * 100, 100);
+                profitBar.style.width = sellingPrice > 0 ? `${percentage}%` : '0%';
+            } else {
+                profitEl.textContent = `${profit.toLocaleString()} k`;
+                profitEl.classList.remove('text-tertiary');
+                profitEl.classList.add('text-error');
+                profitBar.classList.remove('bg-tertiary');
+                profitBar.classList.add('bg-error');
+                profitBar.style.width = '100%';
+            }
+        }
+
+        // Initialize calculations on load
+        window.addEventListener('load', () => {
+            updateTotal();
+        });
+    </script>
+</body></html>

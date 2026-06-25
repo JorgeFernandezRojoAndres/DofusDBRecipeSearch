@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+  <!-- Google Fonts -->
+  <style>
+    @font-face { font-family: 'Cinzel'; font-style: normal; font-weight: 400; font-display: swap; src: url(https://fonts.gstatic.com/s/cinzel/v26/8vIU7ww63mVu7gtR-kwKxNvkNOjw-tbnTYo.ttf) format('truetype'); }
+    @font-face { font-family: 'Cinzel'; font-style: normal; font-weight: 600; font-display: swap; src: url(https://fonts.gstatic.com/s/cinzel/v26/8vIU7ww63mVu7gtR-kwKxNvkNOjw-gjgTYo.ttf) format('truetype'); }
+    @font-face { font-family: 'Cinzel'; font-style: normal; font-weight: 700; font-display: swap; src: url(https://fonts.gstatic.com/s/cinzel/v26/8vIU7ww63mVu7gtR-kwKxNvkNOjw-jHgTYo.ttf) format('truetype'); }
+    @font-face { font-family: 'Hanken Grotesk'; font-style: normal; font-weight: 400; font-display: swap; src: url(https://fonts.gstatic.com/s/hankengrotesk/v12/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_Ncs2Za4Q.ttf) format('truetype'); }
+    @font-face { font-family: 'Hanken Grotesk'; font-style: normal; font-weight: 500; font-display: swap; src: url(https://fonts.gstatic.com/s/hankengrotesk/v12/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_NcgWZa4Q.ttf) format('truetype'); }
+    @font-face { font-family: 'Hanken Grotesk'; font-style: normal; font-weight: 600; font-display: swap; src: url(https://fonts.gstatic.com/s/hankengrotesk/v12/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_NcbWFa4Q.ttf) format('truetype'); }
+    @font-face { font-family: 'Hanken Grotesk'; font-style: normal; font-weight: 700; font-display: swap; src: url(https://fonts.gstatic.com/s/hankengrotesk/v12/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_NcVGFa4Q.ttf) format('truetype'); }
+    @font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxjPQ.ttf) format('truetype'); }
+    @font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 500; font-display: swap; src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8-qxjPQ.ttf) format('truetype'); }
+    @font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 700; font-display: swap; src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8L6tjPQ.ttf) format('truetype'); }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,0" rel="stylesheet">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Verificar Cuenta - DofusDB</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="icon" href="images/favicon.png" type="image/png">
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {"on-secondary":"#412d02","surface-container-highest":"#353534","tertiary-fixed-dim":"#bdcbac","background":"#0A0A0A","on-tertiary-fixed-variant":"#3e4b32","on-surface-variant":"#d1c5b4","error":"#ffb4ab","surface-bright":"#393939","surface-variant":"#353534","secondary-fixed":"#ffdea9","error-container":"#93000a","primary-fixed":"#ffdea5","on-tertiary-container":"#333f27","tertiary":"#bdcbac","secondary-fixed-dim":"#e4c289","on-background":"#e5e2e1","primary-container":"#c5a059","on-primary-container":"#4e3700","secondary-container":"#5d4518","on-error-container":"#ffdad6","inverse-surface":"#e5e2e1","on-secondary-fixed":"#271900","surface-container":"#201f1f","primary-fixed-dim":"#e9c176","on-surface":"#e5e2e1","tertiary-container":"#9caa8c","surface":"#121212","on-tertiary-fixed":"#141f0a","on-secondary-container":"#d5b47c","on-primary":"#412d00","surface-tint":"#e9c176","on-error":"#690005","inverse-on-surface":"#313030","on-tertiary":"#28341d","surface-container-low":"#1c1b1b","on-primary-fixed-variant":"#5d4201","primary":"#e9c176","outline":"#9a8f80","secondary":"#e4c289","outline-variant":"#4e4639","surface-container-high":"#2a2a2a","surface-dim":"#131313","on-primary-fixed":"#261900","surface-container-lowest":"#0e0e0e","on-secondary-fixed-variant":"#5a4316","inverse-primary":"#775a19","tertiary-fixed":"#d9e8c6"},
+          borderRadius: { DEFAULT: "2px", lg: "4px", xl: "8px", full: "12px" },
+          spacing: { gutter: "20px", "margin-desktop": "40px", "margin-mobile": "16px", xs: "4px", xl: "80px", lg: "48px", base: "8px", md: "24px", sm: "12px" },
+          fontFamily: {"titular-xl":["Cinzel"],"titular-lg":["Cinzel"],"titular-md":["Cinzel"],"cuerpo-lg":["Hanken Grotesk"],"cuerpo-md":["Hanken Grotesk"],"etiqueta-sm":["Hanken Grotesk"],"dato-num":["Hanken Grotesk"]},
+          fontSize: {"titular-xl":["48px",{lineHeight:"1.2",letterSpacing:"0.05em",fontWeight:"700"}],"titular-lg":["32px",{lineHeight:"1.3",fontWeight:"600"}],"titular-md":["24px",{lineHeight:"1.4",fontWeight:"600"}],"cuerpo-lg":["18px",{lineHeight:"1.6",fontWeight:"400"}],"cuerpo-md":["16px",{lineHeight:"1.6",fontWeight:"400"}],"etiqueta-sm":["14px",{lineHeight:"1.2",fontWeight:"600"}],"dato-num":["14px",{lineHeight:"1",fontWeight:"700"}]}
+        }
+      }
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+</head>
+<body class="font-cuerpo-md text-on-surface flex items-center justify-center min-h-screen p-margin-mobile" style="background-image: url('images/fondooficion.JPG'); background-size: cover; background-position: center; background-attachment: fixed;">
+  <div class="fixed inset-0 bg-black/80 backdrop-blur-sm z-0 pointer-events-none"></div>
+  <!-- Particles -->
+  <div class="fixed inset-0 pointer-events-none" id="particle-container"></div>
+
+  <main class="relative z-10 w-full max-w-[560px]">
+    <!-- Verification Card -->
+    <div class="glass-panel p-6 rounded-xl flex flex-col items-center text-center space-y-6 border-primary/20">
+      <!-- Icon Section -->
+      <div class="relative group">
+        <div class="absolute inset-0 bg-primary/20 rounded-full blur-3xl group-hover:bg-primary/30 transition-all duration-700"></div>
+        <div class="relative w-32 h-32 flex items-center justify-center bg-surface-container-highest rounded-full border-2 border-primary/40 shadow-[0_0_25px_rgba(212,175,55,0.2)]">
+          <span class="material-symbols-outlined text-primary text-[64px]" style="font-variation-settings: 'FILL' 1;">mark_email_unread</span>
+        </div>
+        <div class="absolute -top-2 -right-2 w-10 h-10 bg-secondary rounded-full border border-primary-fixed-dim flex items-center justify-center shadow-lg">
+          <span class="material-symbols-outlined text-on-secondary text-[20px] font-bold">priority_high</span>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="space-y-2">
+        <h1 class="font-titular-lg text-titular-lg text-primary tracking-wide">¡Pergamino de Verificación Enviado!</h1>
+        <p class="font-cuerpo-lg text-cuerpo-lg text-on-surface-variant max-w-[400px] mx-auto">Por favor, ingresá el código que enviamos a tu correo para activar tu cuenta.</p>
+      </div>
+
+      <!-- Verification Form -->
+      <form id="formVerificar" class="w-full max-w-sm space-y-4">
+        <div class="space-y-2 text-left">
+          <label class="font-etiqueta-sm text-etiqueta-sm text-primary flex items-center gap-2">
+            <span class="material-symbols-outlined text-[16px]">email</span> CORREO ELECTRÓNICO
+          </label>
+          <input type="email" id="email" class="w-full bg-surface-container-lowest border-b-2 border-outline-variant/50 focus:border-primary px-4 py-3 text-on-surface placeholder:text-on-surface-variant/30 rounded-t-lg transition-all focus:outline-none font-cuerpo-md" placeholder="tu@correo.com" required>
+        </div>
+        <div class="space-y-2 text-left">
+          <label class="font-etiqueta-sm text-etiqueta-sm text-primary flex items-center gap-2">
+            <span class="material-symbols-outlined text-[16px]">pin</span> CÓDIGO DE VERIFICACIÓN
+          </label>
+          <input type="text" id="codigo" class="w-full bg-surface-container-lowest border-b-2 border-outline-variant/50 focus:border-primary px-4 py-3 text-on-surface placeholder:text-on-surface-variant/30 rounded-t-lg transition-all focus:outline-none font-cuerpo-md text-center tracking-[0.2em]" placeholder="••••••" required>
+        </div>
+        <button type="submit" class="w-full bg-primary py-4 px-6 rounded-lg text-on-primary font-bold font-etiqueta-sm text-etiqueta-sm uppercase tracking-widest btn-glow transition-all active:scale-95">
+          Verificar Cuenta
+        </button>
+        <p id="mensaje" class="font-etiqueta-sm text-etiqueta-sm text-center"></p>
+      </form>
+
+      <!-- Resend Section -->
+      <div class="w-full space-y-3 pt-2">
+        <button class="group relative w-full h-14 bg-transparent border border-primary/50 text-primary-fixed-dim rounded-lg overflow-hidden transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed" disabled id="resendBtn">
+          <span class="relative z-10 font-etiqueta-sm text-etiqueta-sm flex items-center justify-center gap-2" id="btnText">
+            <span class="material-symbols-outlined">refresh</span>
+            Reenviar Código (<span id="countdown">60</span>s)
+          </span>
+          <div class="absolute inset-y-0 left-0 bg-primary/10 transition-all duration-1000 ease-linear" id="btnProgress" style="width: 100%"></div>
+        </button>
+        <p class="font-etiqueta-sm text-etiqueta-sm text-on-surface-variant/60 flex items-center justify-center gap-1">
+          <span class="material-symbols-outlined text-[16px]">info</span>
+          ¿No recibiste nada? Revisa tu carpeta de spam.
+        </p>
+      </div>
+
+      <!-- Footer -->
+      <div class="pt-4 border-t border-outline-variant/30 w-full flex justify-between items-center">
+        <a href="login.html" class="font-etiqueta-sm text-etiqueta-sm text-primary/80 hover:text-primary flex items-center gap-1 transition-colors">
+          <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+          Volver al login
+        </a>
+        <span class="font-dato-num text-primary/40 text-[12px]">DofusDB v2.4.1</span>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Particle system
+    const container = document.getElementById('particle-container');
+    for (let i = 0; i < 20; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      const size = Math.random() * 4 + 1;
+      particle.style.width = size + 'px';
+      particle.style.height = size + 'px';
+      particle.style.left = Math.random() * 100 + 'vw';
+      particle.style.top = Math.random() * 100 + 'vh';
+      particle.style.animationDelay = Math.random() * 8 + 's';
+      particle.style.animationDuration = (Math.random() * 10 + 5) + 's';
+      container.appendChild(particle);
+    }
+
+    // Countdown
+    let timeLeft = 60;
+    const countdownEl = document.getElementById('countdown');
+    const resendBtn = document.getElementById('resendBtn');
+    const btnText = document.getElementById('btnText');
+    const btnProgress = document.getElementById('btnProgress');
+
+    const timer = setInterval(() => {
+      timeLeft--;
+      countdownEl.textContent = timeLeft;
+      btnProgress.style.width = (timeLeft / 60) * 100 + '%';
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        resendBtn.disabled = false;
+        resendBtn.classList.add('active-glow');
+        btnText.innerHTML = '<span class="material-symbols-outlined">send</span> Reenviar Pergamino Ahora';
+        btnProgress.style.display = 'none';
+      }
+    }, 1000);
+
+    resendBtn.addEventListener('click', () => {
+      if (!resendBtn.disabled) {
+        resendBtn.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          resendBtn.style.transform = 'scale(1)';
+          // Re-enable countdown
+          timeLeft = 60;
+          resendBtn.disabled = true;
+          resendBtn.classList.remove('active-glow');
+          btnText.innerHTML = '<span class="material-symbols-outlined">refresh</span> Reenviar Código (<span id="countdown">60</span>s)';
+          btnProgress.style.display = 'block';
+          btnProgress.style.width = '100%';
+          // Restart timer
+          const newTimer = setInterval(() => {
+            const cd = document.getElementById('countdown');
+            if (!cd) { clearInterval(newTimer); return; }
+            timeLeft--;
+            cd.textContent = timeLeft;
+            btnProgress.style.width = (timeLeft / 60) * 100 + '%';
+            if (timeLeft <= 0) {
+              clearInterval(newTimer);
+              resendBtn.disabled = false;
+              resendBtn.classList.add('active-glow');
+              btnText.innerHTML = '<span class="material-symbols-outlined">send</span> Reenviar Pergamino Ahora';
+              btnProgress.style.display = 'none';
+            }
+          }, 1000);
+        }, 150);
+      }
+    });
+
+    // Verification form submit
+    document.getElementById('formVerificar').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const codigo = document.getElementById('codigo').value;
+      const mensaje = document.getElementById('mensaje');
+
+      try {
+        const res = await fetch('/api/verify-code', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, codigo })
+        });
+        const data = await res.json();
+        mensaje.textContent = data.message || '✅ Verificado correctamente';
+        mensaje.className = 'font-etiqueta-sm text-etiqueta-sm text-center text-tertiary';
+        if (res.ok) {
+          setTimeout(() => window.location.href = 'verificacionExitosa.html', 1200);
+        }
+      } catch (err) {
+        mensaje.textContent = '❌ Error al verificar.';
+        mensaje.className = 'font-etiqueta-sm text-etiqueta-sm text-center text-error';
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>

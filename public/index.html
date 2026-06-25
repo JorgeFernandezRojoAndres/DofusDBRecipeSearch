@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+  <!-- Google Fonts: Inline @font-face -->
+  <style>
+    @font-face { font-family: 'Cinzel'; font-style: normal; font-weight: 400; font-display: swap; src: url(https://fonts.gstatic.com/s/cinzel/v26/8vIU7ww63mVu7gtR-kwKxNvkNOjw-tbnTYo.ttf) format('truetype'); }
+    @font-face { font-family: 'Cinzel'; font-style: normal; font-weight: 600; font-display: swap; src: url(https://fonts.gstatic.com/s/cinzel/v26/8vIU7ww63mVu7gtR-kwKxNvkNOjw-gjgTYo.ttf) format('truetype'); }
+    @font-face { font-family: 'Cinzel'; font-style: normal; font-weight: 700; font-display: swap; src: url(https://fonts.gstatic.com/s/cinzel/v26/8vIU7ww63mVu7gtR-kwKxNvkNOjw-jHgTYo.ttf) format('truetype'); }
+    @font-face { font-family: 'Hanken Grotesk'; font-style: normal; font-weight: 400; font-display: swap; src: url(https://fonts.gstatic.com/s/hankengrotesk/v12/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_Ncs2Za4Q.ttf) format('truetype'); }
+    @font-face { font-family: 'Hanken Grotesk'; font-style: normal; font-weight: 500; font-display: swap; src: url(https://fonts.gstatic.com/s/hankengrotesk/v12/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_NcgWZa4Q.ttf) format('truetype'); }
+    @font-face { font-family: 'Hanken Grotesk'; font-style: normal; font-weight: 600; font-display: swap; src: url(https://fonts.gstatic.com/s/hankengrotesk/v12/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_NcbWFa4Q.ttf) format('truetype'); }
+    @font-face { font-family: 'Hanken Grotesk'; font-style: normal; font-weight: 700; font-display: swap; src: url(https://fonts.gstatic.com/s/hankengrotesk/v12/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_NcVGFa4Q.ttf) format('truetype'); }
+    @font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxjPQ.ttf) format('truetype'); }
+    @font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 500; font-display: swap; src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8-qxjPQ.ttf) format('truetype'); }
+    @font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 700; font-display: swap; src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8L6tjPQ.ttf) format('truetype'); }
+  </style>
+  <!-- Material Symbols -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,0" rel="stylesheet">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Búsqueda de Recetas en Dofus - Calculador de Ganancias</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Buscador de recetas de objetos de Dofus. Calcula tus ganancias de forma rápida y sencilla.">
+  <meta name="keywords" content="Dofus, recetas, objetos, kamas, búsqueda, economía, alquimia, herrero, crudo, oficio">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Jorge Fernández Rojo Andrés">
+  <link rel="canonical" href="https://recetasdofus.com.ar">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Búsqueda de Recetas - Recetas Dofus">
+  <meta property="og:description" content="Calculá cuánto ganás al fabricar objetos en Dofus.">
+  <meta property="og:image" content="https://recetasdofus.com.ar/images/favicon.png">
+  <meta property="og:url" content="https://recetasdofus.com.ar">
+  <meta property="og:type" content="website">
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-secondary": "#412d02","surface-container-highest": "#353534","tertiary-fixed-dim": "#bdcbac","background": "#0A0A0A","on-tertiary-fixed-variant": "#3e4b32","on-surface-variant": "#d1c5b4","error": "#ffb4ab","surface-bright": "#393939","surface-variant": "#353534","secondary-fixed": "#ffdea9","error-container": "#93000a","primary-fixed": "#ffdea5","on-tertiary-container": "#333f27","tertiary": "#bdcbac","secondary-fixed-dim": "#e4c289","on-background": "#e5e2e1","primary-container": "#c5a059","on-primary-container": "#4e3700","secondary-container": "#5d4518","on-error-container": "#ffdad6","inverse-surface": "#e5e2e1","on-secondary-fixed": "#271900","surface-container": "#201f1f","primary-fixed-dim": "#e9c176","on-surface": "#e5e2e1","tertiary-container": "#9caa8c","surface": "#121212","on-tertiary-fixed": "#141f0a","on-secondary-container": "#d5b47c","on-primary": "#412d00","surface-tint": "#e9c176","on-error": "#690005","inverse-on-surface": "#313030","on-tertiary": "#28341d","surface-container-low": "#1c1b1b","on-primary-fixed-variant": "#5d4201","primary": "#e9c176","outline": "#9a8f80","secondary": "#e4c289","outline-variant": "#4e4639","surface-container-high": "#2a2a2a","surface-dim": "#131313","on-primary-fixed": "#261900","surface-container-lowest": "#0e0e0e","on-secondary-fixed-variant": "#5a4316","inverse-primary": "#775a19","tertiary-fixed": "#d9e8c6"
+          },
+          borderRadius: { DEFAULT: "2px", lg: "4px", xl: "8px", full: "12px" },
+          spacing: { gutter: "20px", "margin-desktop": "40px", "margin-mobile": "16px", xs: "4px", xl: "80px", lg: "48px", base: "8px", md: "24px", sm: "12px" },
+          fontFamily: {
+            "titular-xl": ["Cinzel"], "titular-lg": ["Cinzel"], "titular-md": ["Cinzel"],
+            "cuerpo-lg": ["Hanken Grotesk"], "cuerpo-md": ["Hanken Grotesk"],
+            "etiqueta-sm": ["Hanken Grotesk"], "dato-num": ["Hanken Grotesk"]
+          },
+          fontSize: {
+            "titular-xl": ["48px", { lineHeight: "1.2", letterSpacing: "0.05em", fontWeight: "700" }],
+            "titular-lg": ["32px", { lineHeight: "1.3", fontWeight: "600" }],
+            "titular-md": ["24px", { lineHeight: "1.4", fontWeight: "600" }],
+            "cuerpo-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+            "cuerpo-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+            "etiqueta-sm": ["14px", { lineHeight: "1.2", fontWeight: "600" }],
+            "dato-num": ["14px", { lineHeight: "1", fontWeight: "700" }]
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Bootstrap CSS (carga antes que Tailwind para que Tailwind tenga prioridad) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="icon" href="images/favicon.png" type="image/png">
+
+  <!-- Google Adsense & Analytics -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8948109105283119" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GHSB8ZF8WD"></script>
+  <script src="js/gtag-init.js"></script>
+  <script src="js/consent-mode.js"></script>
+  <script src="js/gtag-config.js"></script>
+</head>
+<body class="bg-background text-on-surface min-h-screen font-cuerpo-md antialiased overflow-x-hidden">
+  <!-- Background overlay -->
+  <div class="background-overlay"></div>
+
+  <!-- Visit Counter -->
+  <div class="visit-counter">
+    <span id="contador-visitas">Usuarios hasta el momento: 0</span>
+  </div>
+
+  <!-- Fixed TopNav al estilo prototipo -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-surface/80 backdrop-blur-xl border-b border-primary/20 shadow-[0_0_15px_rgba(212,175,55,0.1)]">
+    <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto h-16">
+      <div class="flex items-center gap-4 md:gap-8">
+        <a href="index.html" class="font-titular-md text-titular-md font-bold text-primary">DofusDB</a>
+        <nav class="hidden md:flex items-center gap-6">
+          <a class="font-etiqueta-sm text-etiqueta-sm text-primary border-b-2 border-primary pb-1" href="index.html">Inicio</a>
+          <a class="font-etiqueta-sm text-etiqueta-sm text-primary transition-colors" href="blog.html">Recetas Buscadas</a>
+        </nav>
+      </div>
+      <div class="flex items-center gap-2 flex-wrap justify-end">
+        <button id="btnRedirectLogin" class="font-etiqueta-sm text-etiqueta-sm text-primary border-[3px] border-black hover:border-black/70 transition-all rounded px-3 py-2 bg-surface-container-low/50" hidden>Iniciar Sesión</button>
+        <button id="btnRedirectRegister" class="font-etiqueta-sm text-etiqueta-sm bg-primary text-on-primary font-bold hover:brightness-110 outer-glow-gold transition-all rounded px-3 py-2" hidden>Registrarse</button>
+        <button id="btnUltimasRecetas" class="font-etiqueta-sm text-etiqueta-sm text-primary border border-outline-variant/50 hover:border-primary transition-all rounded px-3 py-2" hidden>Últimas Recetas</button>
+        <button id="btnVolversePremium" class="font-etiqueta-sm text-etiqueta-sm bg-primary text-on-primary font-bold hover:brightness-110 outer-glow-gold transition-all rounded px-3 py-2" hidden>Volverse Premium</button>
+        <button id="btnBeneficios" class="font-etiqueta-sm text-etiqueta-sm text-primary border border-outline-variant/50 hover:border-primary transition-all rounded px-3 py-2" hidden>Ver Beneficios</button>
+        <button id="btnLogout" class="font-etiqueta-sm text-etiqueta-sm text-error border border-error/50 hover:border-error transition-all rounded px-3 py-2" hidden>Cerrar Sesión</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-[1440px] mx-auto pt-24 pb-12 px-margin-mobile md:px-margin-desktop">
+    <!-- Hero / Title Section -->
+    <header class="mb-8 text-center">
+      <h1 class="font-titular-xl text-[52px] text-black mb-2 titulo-grueso">Calculadora de Ganancias</h1>
+      <p class="font-cuerpo-lg text-cuerpo-lg text-white max-w-2xl mx-auto subtitulo-contraste">Optimiza tu producción de artesanía analizando costes de mercado y beneficios proyectados en tiempo real.</p>
+    </header>
+
+    <!-- Search Section -->
+    <section class="mb-8">
+      <div class="max-w-[1440px] mx-auto">
+        <form id="searchForm" class="flex flex-col md:flex-row items-center justify-center gap-3 p-4 glass-panel max-w-2xl mx-auto rounded-xl">
+          <span class="material-symbols-outlined text-primary">search</span>
+          <input type="text" id="objectName" class="flex-1 w-full bg-surface-container-lowest border-b-2 border-outline-variant/50 focus:border-primary px-4 py-3 text-on-surface placeholder:text-on-surface-variant/30 font-cuerpo-md transition-all rounded-t-lg focus:outline-none" placeholder="Buscar objeto... (ej: Espada del Chef)" required>
+          <button type="submit" class="w-full md:w-auto bg-primary text-on-primary font-bold px-6 py-3 rounded-lg font-titular-md text-etiqueta-sm uppercase tracking-widest outer-glow-gold transition-all active:scale-[0.98]">
+            Buscar Receta
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- AdSense -->
+    <div class="d-flex justify-content-center my-1 px-margin-mobile">
+      <ins class="adsbygoogle adsense-block" style="display:block" data-ad-client="ca-pub-8948109105283119" data-ad-slot="9450520549" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    </div>
+    <script>window.addEventListener('load', () => { (adsbygoogle = window.adsbygoogle || []).push({}); });</script>
+
+    <!-- Main Content: Recipe Results -->
+    <div id="resultContainer" class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start mt-6" style="display: none;">
+      <!-- Left: Recipe Summary -->
+      <section class="lg:col-span-8 space-y-6">
+        <div class="glass-panel p-4 rounded-xl overflow-hidden">
+          <div class="flex items-center justify-between mb-4 border-b border-outline-variant/20 pb-3">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-primary">inventory_2</span>
+              <h2 class="font-titular-md text-titular-md text-on-surface" id="nombreObjeto"></h2>
+            </div>
+            <span class="font-etiqueta-sm text-etiqueta-sm text-gray-300 italic" id="recipeItemsCount"></span>
+          </div>
+          <div class="overflow-x-auto">
+            <!-- Recipe Image & Description -->
+            <div id="imagenObjeto" class="flex justify-center mb-4"></div>
+            <div id="descripcionObjeto" class="font-cuerpo-md text-gray-300 mb-4 italic"></div>
+            <div id="efectosObjeto" class="mb-4"></div>
+            <!-- Ingredients List -->
+            <div class="border-t border-outline-variant/20 pt-4">
+              <h3 class="font-titular-md text-titular-md text-primary mb-4">Ingredientes</h3>
+              <ul id="ingredientes" class="space-y-3"></ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right: Sticky Calculation Sidebar -->
+      <aside class="lg:col-span-4 lg:sticky lg:top-24 space-y-6">
+        <div class="glass-panel p-4 rounded-xl relative overflow-hidden">
+          <div class="absolute -right-4 -top-4 opacity-5 pointer-events-none">
+            <span class="material-symbols-outlined text-[120px]" style="font-variation-settings: 'FILL' 1;">calculate</span>
+          </div>
+          <h2 class="font-titular-md text-titular-md text-primary mb-4 flex items-center gap-2">
+            <span class="material-symbols-outlined">analytics</span> Resumen de Ganancias
+          </h2>
+          <div class="space-y-4">
+            <!-- Sale Price -->
+            <div class="space-y-2">
+              <label class="font-etiqueta-sm text-etiqueta-sm text-gray-300 uppercase tracking-tighter">Precio de Venta</label>
+              <div class="flex items-center bg-surface-container-lowest border-b-2 border-outline-variant/50 focus-within:border-primary transition-all rounded-t-lg p-3">
+                <input type="number" id="precioObjeto" class="bg-transparent border-none p-0 text-primary w-full focus:ring-0 font-dato-num text-titular-md" placeholder="0">
+                <span class="text-primary font-dato-num ml-2">K</span>
+              </div>
+            </div>
+            <!-- Quantity -->
+            <div class="space-y-2">
+              <label class="font-etiqueta-sm text-etiqueta-sm text-gray-300 uppercase tracking-tighter">Cantidad a fabricar</label>
+              <div class="flex items-center bg-surface-container-lowest border-b-2 border-outline-variant/50 focus-within:border-primary transition-all rounded-t-lg p-3">
+                <input type="number" id="cantidadFabricar" value="1" min="1" class="bg-transparent border-none p-0 text-on-surface w-full focus:ring-0 font-dato-num">
+                <span class="text-gray-400 font-etiqueta-sm ml-2">uds</span>
+              </div>
+            </div>
+            <!-- Costs & Profit -->
+            <div class="p-4 bg-surface-container-highest rounded-xl border border-primary/10 space-y-3 shadow-inner">
+              <div class="flex justify-between items-center">
+                <span class="font-etiqueta-sm text-etiqueta-sm text-gray-300 uppercase">Gasto por unidad</span>
+                <span class="font-titular-md text-titular-md text-white"><span id="gasto">0</span> K</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="font-etiqueta-sm text-etiqueta-sm text-gray-300 uppercase">Ganancia por unidad</span>
+                <span class="font-titular-md text-titular-md text-secondary"><span id="ganancia">0</span> K</span>
+              </div>
+              <div class="border-t border-outline-variant/20 pt-3 space-y-2">
+                <div class="flex justify-between items-center">
+                  <span class="font-etiqueta-sm text-etiqueta-sm text-gray-300 uppercase">Gasto Total</span>
+                  <span class="font-titular-md text-titular-md text-white"><span id="gastoTotal">0</span> K</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="font-etiqueta-sm text-etiqueta-sm text-gray-300 uppercase">Ganancia Total</span>
+                  <span class="font-titular-lg text-titular-lg text-primary drop-shadow-[0_0_10px_rgba(233,193,118,0.3)]"><span id="gananciaTotal">0</span> K</span>
+                </div>
+              </div>
+              <!-- Profit bar -->
+              <div class="w-full bg-surface-container-low h-1 rounded-full mt-2 overflow-hidden">
+                <div class="h-full bg-tertiary w-0 transition-all duration-700" id="profit-bar"></div>
+              </div>
+            </div>
+            <!-- Bulk Ingredients -->
+            <div>
+              <h4 class="font-etiqueta-sm text-etiqueta-sm text-gray-300 uppercase tracking-tighter mb-2">Ingredientes Totales Necesarios</h4>
+              <ul id="ingredientesTotales" class="space-y-1 font-cuerpo-md text-white"></ul>
+            </div>
+          </div>
+        </div>
+        <!-- Lore Tip -->
+        <div class="p-4 border-l-2 border-primary bg-surface-container-low italic font-cuerpo-md text-gray-300 opacity-80 rounded-r-lg">
+          "Un buen artesano conoce sus materiales, pero un maestro artesano conoce sus márgenes. No desperdicies kamas en recursos sobrevalorados."
+        </div>
+      </aside>
+    </div>
+
+    <!-- Empty State -->
+    <div id="emptyState" class="text-center py-16">
+      <span class="material-symbols-outlined text-white opacity-30 mb-4" style="font-size: 80px;">travel_explore</span>
+      <p class="font-cuerpo-lg text-[22px] text-white border-[3px] border-black subtitulo-contraste">Ingresá el nombre de un objeto para ver su receta y calcular tus ganancias.</p>
+    </div>
+
+    <!-- Info Sections -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter mt-12">
+      <div class="glass-panel p-4 rounded-xl">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="material-symbols-outlined text-primary">menu_book</span>
+          <h2 class="font-titular-md text-titular-md text-primary">¿Qué es Recetas Dofus?</h2>
+        </div>
+        <p class="font-cuerpo-md text-cuerpo-md text-white">Recetas Dofus es una herramienta gratuita pensada para los jugadores de Dofus que desean maximizar sus ganancias dentro del juego. Buscá recetas de objetos, calculá tus costos de fabricación y estimá tus ganancias de forma rápida y sencilla.</p>
+      </div>
+      <div class="glass-panel p-4 rounded-xl">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="material-symbols-outlined text-primary">auto_awesome</span>
+          <h2 class="font-titular-md text-titular-md text-primary">¿Cómo funciona?</h2>
+        </div>
+        <p class="font-cuerpo-md text-cuerpo-md text-white">Usar Recetas Dofus es sencillo: ingresá el nombre del objeto, obtené la receta, completá precios y calculá costos y ganancias automáticamente. También podés calcular los ingredientes necesarios para producciones en masa.</p>
+      </div>
+      <div class="glass-panel p-4 rounded-xl">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="material-symbols-outlined text-primary">help</span>
+          <h2 class="font-titular-md text-titular-md text-primary">Preguntas Frecuentes</h2>
+        </div>
+        <div class="space-y-3">
+          <div><p class="font-etiqueta-sm text-etiqueta-sm text-primary">¿Es gratuita?</p><p class="font-cuerpo-md text-cuerpo-md text-white">Sí, completamente gratuita.</p></div>
+          <div><p class="font-etiqueta-sm text-etiqueta-sm text-primary">¿Necesito registrarme?</p><p class="font-cuerpo-md text-cuerpo-md text-white">No es necesario. El registro es opcional para funciones premium.</p></div>
+          <div><p class="font-etiqueta-sm text-etiqueta-sm text-primary">¿Los datos se actualizan?</p><p class="font-cuerpo-md text-cuerpo-md text-white">Sí, se basan en la API de DofusDB.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Community -->
+    <div class="mt-6 p-4 glass-panel rounded-xl text-center">
+      <p class="font-cuerpo-md text-cuerpo-md text-white">Esta plataforma está en desarrollo activo. Si querés sugerir ideas o compartir estrategias con otros jugadores, podés unirte a nuestra comunidad en <a href="https://chat.whatsapp.com/KjGngGANugeIWmCNJGTXnG" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline transition-all">nuestro grupo de WhatsApp</a>.</p>
+    </div>
+
+    <!-- 3D Scene -->
+    <section class="mt-8">
+      <div id="threeContainer" style="width: 100%; height: 400px;"></div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="w-full py-6 px-margin-mobile md:px-margin-desktop border-t border-primary/10 bg-surface-container-low mt-8">
+    <div class="max-w-[1440px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="text-center md:text-left">
+        <span class="font-titular-md text-primary block mb-2">DofusDB</span>
+        <span class="font-etiqueta-sm text-etiqueta-sm text-primary">© 2025 Jorge Fernández Rojo Andrés</span>
+      </div>
+      <div class="flex gap-6 items-center">
+        <a class="footer-link" href="privacidad.html">Privacidad</a>
+        <a class="footer-link" href="terminos.html">Términos</a>
+        <a class="footer-link" href="mailto:jf_wolf_887@hotmail.com">Contacto</a>
+        <div class="flex gap-3 ml-4">
+          <a href="https://www.youtube.com/@Yotaroto" target="_blank" rel="noopener noreferrer">
+            <img src="images/youtube.png" alt="YouTube" width="24" height="24" class="opacity-60 hover:opacity-100 transition-opacity">
+          </a>
+          <a href="https://www.linkedin.com/in/jorgeandresfernandezrojo/" target="_blank" rel="noopener noreferrer">
+            <img src="images/linkedin-logo.png" alt="LinkedIn" width="24" height="24" class="opacity-60 hover:opacity-100 transition-opacity">
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Verification Modal -->
+  <div class="modal fade" id="verificacionModal" tabindex="-1" aria-labelledby="verificacionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content bg-surface-container-low border-outline-variant">
+        <div class="modal-header border-b border-outline-variant/30">
+          <h5 class="modal-title font-titular-md text-primary" id="verificacionModalLabel">⚠️ Cuenta no verificada</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <p class="font-cuerpo-md">Tu cuenta todavía no está verificada. Revisá tu correo electrónico para completar la verificación.</p>
+          <p class="font-cuerpo-md mt-2">¿No recibiste el correo? Podés solicitar uno nuevo haciendo clic en el botón de abajo.</p>
+        </div>
+        <div class="modal-footer border-t border-outline-variant/30">
+          <button type="button" class="font-etiqueta-sm text-etiqueta-sm text-on-surface-variant border border-outline-variant hover:border-primary transition-all rounded px-3 py-2" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="bg-primary text-on-primary font-bold px-4 py-2 font-etiqueta-sm text-etiqueta-sm outer-glow-gold transition-all rounded" id="btnReenviarVerificacion">Reenviar correo de verificación</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/verificarSesion.js"></script>
+  <script type="module" src="js/render.js"></script>
+  <script type="module" src="js/calculo.js"></script>
+  <script type="module" src="js/search.js"></script>
+  <script src="js/videoModal.js"></script>
+  <script src="js/cookies-banner.js"></script>
+  <script src="js/language-toggle.js"></script>
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script src="js/escenaDofus.js"></script>
+  <script>
+    function actualizarContadorVisitas() {
+      fetch('/api/visitas')
+        .then(res => res.json())
+        .then(data => {
+          const contador = document.getElementById('contador-visitas');
+          if (contador) contador.textContent = `Usuarios hasta el momento: ${data.total}`;
+        })
+        .catch(err => console.error('Error al cargar las visitas:', err));
+    }
+    actualizarContadorVisitas();
+    setInterval(actualizarContadorVisitas, 30000);
+  </script>
+</body>
+</html>

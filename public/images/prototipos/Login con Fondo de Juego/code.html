@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head><style>
+        body {
+            background-color: #0F0F10;
+            overflow: hidden;
+        }
+
+        .glass-panel {
+            background: rgba(28, 27, 28, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(233, 193, 118, 0.15);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .metallic-border {
+            border-bottom: 1px solid transparent;
+            border-image: linear-gradient(to right, transparent, #e9c176, transparent) 1;
+        }
+
+        .input-glow:focus {
+            box-shadow: inset 0 0 10px rgba(233, 193, 118, 0.1);
+            outline: none;
+            border-color: #e9c176;
+        }
+
+        .btn-glow:hover {
+            box-shadow: 0 0 20px rgba(233, 193, 118, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .active-tab {
+            color: #e9c176;
+            border-bottom: 2px solid #e9c176;
+        }
+
+        /* Ambient particles simulation */
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #e9c176;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            animation: float-up 10s infinite linear;
+        }
+
+        @keyframes float-up {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            50% { opacity: 0.3; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+    </style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DofusDB - Iniciar Sesión</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&amp;family=Hanken+Grotesk:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#e9c176",
+                        "tertiary": "#bdcbac",
+                        "surface-container-high": "#2a2a2b",
+                        "tertiary-container": "#9caa8c",
+                        "on-primary": "#412d00",
+                        "on-secondary": "#3c2f00",
+                        "primary-fixed": "#ffdea5",
+                        "on-tertiary-container": "#333f27",
+                        "secondary-container": "#af8d11",
+                        "secondary-fixed-dim": "#e9c349",
+                        "primary": "#e9c176",
+                        "surface-container": "#201f20",
+                        "on-primary-fixed": "#261900",
+                        "surface-container-low": "#1c1b1c",
+                        "on-secondary-container": "#342800",
+                        "on-surface-variant": "#d1c5b4",
+                        "on-surface": "#e5e2e3",
+                        "on-primary-container": "#4e3700",
+                        "on-tertiary-fixed-variant": "#3e4b32",
+                        "surface-container-highest": "#353436",
+                        "outline": "#9a8f80",
+                        "inverse-on-surface": "#313031",
+                        "surface-dim": "#131314",
+                        "background": "#131314",
+                        "secondary-fixed": "#ffe088",
+                        "secondary": "#e9c349",
+                        "surface": "#131314",
+                        "surface-bright": "#39393a",
+                        "tertiary-fixed-dim": "#bdcbac",
+                        "on-tertiary": "#28341d",
+                        "tertiary-fixed": "#d9e8c6",
+                        "inverse-surface": "#e5e2e3",
+                        "on-primary-fixed-variant": "#5d4201",
+                        "surface-tint": "#e9c176",
+                        "on-error-container": "#ffdad6",
+                        "surface-variant": "#353436",
+                        "surface-container-lowest": "#0e0e0f",
+                        "error": "#ffb4ab",
+                        "on-background": "#e5e2e3",
+                        "on-secondary-fixed": "#241a00",
+                        "on-tertiary-fixed": "#141f0a",
+                        "inverse-primary": "#775a19",
+                        "on-error": "#690005",
+                        "on-secondary-fixed-variant": "#574500",
+                        "error-container": "#93000a",
+                        "primary-container": "#c5a059",
+                        "outline-variant": "#4e4639"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "rejilla-hueco": "1.5rem",
+                        "unidad-base": "4px",
+                        "margen-lg": "2rem",
+                        "espaciado-seccion": "4rem",
+                        "margen-md": "1rem",
+                        "margen-xs": "0.5rem"
+                    },
+                    "fontFamily": {
+                        "cuerpo-lg": ["Hanken Grotesk"],
+                        "dato-num": ["Hanken Grotesk"],
+                        "titular-xl": ["Cinzel"],
+                        "titular-md": ["Cinzel"],
+                        "titular-lg": ["Cinzel"],
+                        "etiqueta-sm": ["Hanken Grotesk"],
+                        "cuerpo-md": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "cuerpo-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "dato-num": ["14px", {"lineHeight": "1", "fontWeight": "700"}],
+                        "titular-xl": ["48px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "titular-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "titular-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "etiqueta-sm": ["14px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "cuerpo-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="min-h-screen flex items-center justify-center relative font-cuerpo-md text-on-surface">
+<!-- Background Layer -->
+<div class="fixed inset-0 z-0">
+<img alt="background" class="w-full h-full object-cover object-center fixed inset-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrM3zO4HloHhwnh46vcYacBokxG7Pq2rUTm8iHY7e6AN9Do9uCQhSdkLxqRWOmMhOnBIGKassM0LRcsq3fSWGJdNx2AdCJRSZaIvKrCxCt4Pxk7CItu1EBOPmPw3vZdGUgsV69x1wRHEItdww53xoLesh_nFf0R-Fhx7fHrp5f7jltSPrmAoKXmYCeZWyKqZMwqxdNAVMEb8zFTKUlgFcdz4jEOEJ3s17W4azhiTrZmpx3xkkU93gFkeMFmOjubno6nw4dQ6LpXoA"/>
+<div class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+</div>
+<!-- Atmospheric Particles -->
+<div class="fixed inset-0 pointer-events-none" id="particles-container"></div>
+<!-- Login/Register Container -->
+<main class="relative z-10 w-full max-w-[440px] px-margen-md">
+<!-- Brand Identity -->
+<div class="text-center mb-margen-lg">
+<h1 class="font-titular-xl text-titular-xl text-primary drop-shadow-[0_0_10px_rgba(233,193,118,0.3)] tracking-widest uppercase">
+                DofusDB
+            </h1>
+<p class="font-etiqueta-sm text-etiqueta-sm text-primary-fixed-dim/60 tracking-[0.2em] uppercase mt-2">
+                El Legado del Artesano
+            </p>
+</div>
+<!-- Auth Card -->
+<div class="glass-panel rounded-xl overflow-hidden transition-all duration-500 transform scale-100 hover:scale-[1.01]">
+<!-- Tabs Navigation -->
+<nav class="flex border-b border-outline-variant/30">
+<button class="flex-1 py-4 font-titular-md text-etiqueta-sm uppercase tracking-wider transition-all duration-300 active-tab" id="tab-login" onclick="toggleAuth('login')">
+                    Iniciar Sesión
+                </button>
+<button class="flex-1 py-4 font-titular-md text-etiqueta-sm uppercase tracking-wider text-on-surface-variant hover:text-primary transition-all duration-300" id="tab-register" onclick="toggleAuth('register')">
+                    Crear Cuenta
+                </button>
+</nav>
+<div class="p-margen-lg">
+<!-- Login Form -->
+<form class="space-y-6 block" id="form-login">
+<div class="space-y-2">
+<label class="font-etiqueta-sm text-etiqueta-sm text-on-surface-variant block ml-1 uppercase tracking-tighter">
+                            Usuario o Correo Electrónico
+                        </label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary/40 group-focus-within:text-primary transition-colors">person</span>
+<input class="w-full bg-surface-container-lowest border-b-2 border-outline-variant/50 focus:border-primary px-10 py-3 text-on-surface placeholder:text-on-surface-variant/30 input-glow transition-all rounded-t-lg" placeholder="Ingresa tu identidad..." type="text"/>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-center px-1">
+<label class="font-etiqueta-sm text-etiqueta-sm text-on-surface-variant uppercase tracking-tighter">
+                                Contraseña
+                            </label>
+<a class="text-[12px] text-primary/60 hover:text-primary transition-colors font-etiqueta-sm" href="#">¿Olvidaste tu llave?</a>
+</div>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary/40 group-focus-within:text-primary transition-colors">key</span>
+<input class="w-full bg-surface-container-lowest border-b-2 border-outline-variant/50 focus:border-primary px-10 py-3 text-on-surface placeholder:text-on-surface-variant/30 input-glow transition-all rounded-t-lg" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<div class="flex items-center space-x-2 px-1">
+<input class="w-4 h-4 rounded border-outline-variant bg-surface-container-lowest text-primary focus:ring-primary/20" id="remember" type="checkbox"/>
+<label class="text-[12px] text-on-surface-variant cursor-pointer select-none" for="remember">Mantener sesión iniciada</label>
+</div>
+<button class="w-full bg-primary py-4 px-6 rounded-lg text-on-primary font-titular-md text-etiqueta-sm uppercase tracking-widest font-bold btn-glow transition-all active:scale-95 flex items-center justify-center gap-2 group" type="submit">
+<span>Ingresar al Mundo</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">bolt</span>
+</button>
+</form>
+<!-- Register Form (Hidden by default) -->
+<form class="space-y-5 hidden" id="form-register">
+<div class="space-y-2">
+<label class="font-etiqueta-sm text-etiqueta-sm text-on-surface-variant block ml-1 uppercase tracking-tighter">Nombre de Usuario</label>
+<input class="w-full bg-surface-container-lowest border-b-2 border-outline-variant/50 focus:border-primary px-4 py-3 text-on-surface placeholder:text-on-surface-variant/30 input-glow transition-all rounded-t-lg" placeholder="Ej: MaestroForjador" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-etiqueta-sm text-etiqueta-sm text-on-surface-variant block ml-1 uppercase tracking-tighter">Correo Electrónico</label>
+<input class="w-full bg-surface-container-lowest border-b-2 border-outline-variant/50 focus:border-primary px-4 py-3 text-on-surface placeholder:text-on-surface-variant/30 input-glow transition-all rounded-t-lg" placeholder="aventurero@ejemplo.com" type="email"/>
+</div>
+<div class="space-y-2">
+<label class="font-etiqueta-sm text-etiqueta-sm text-on-surface-variant block ml-1 uppercase tracking-tighter">Contraseña</label>
+<input class="w-full bg-surface-container-lowest border-b-2 border-outline-variant/50 focus:border-primary px-4 py-3 text-on-surface placeholder:text-on-surface-variant/30 input-glow transition-all rounded-t-lg" placeholder="Mínimo 8 caracteres" type="password"/>
+</div>
+<div class="space-y-2">
+<label class="font-etiqueta-sm text-etiqueta-sm text-on-surface-variant block ml-1 uppercase tracking-tighter">Confirmar Contraseña</label>
+<input class="w-full bg-surface-container-lowest border-b-2 border-outline-variant/50 focus:border-primary px-4 py-3 text-on-surface placeholder:text-on-surface-variant/30 input-glow transition-all rounded-t-lg" placeholder="Repite tu clave" type="password"/>
+</div>
+<button class="w-full bg-primary py-4 px-6 rounded-lg text-on-primary font-titular-md text-etiqueta-sm uppercase tracking-widest font-bold btn-glow transition-all active:scale-95 mt-4" type="submit">
+                        Comenzar Aventura
+                    </button>
+</form>
+</div>
+<!-- Footer info -->
+<div class="bg-surface-container-low/50 py-4 px-margen-lg border-t border-outline-variant/10 text-center">
+<p class="text-[11px] text-on-surface-variant/40 font-etiqueta-sm uppercase tracking-tighter">
+                    Al ingresar aceptas los Términos del Gremio y la Política de Secretos.
+                </p>
+</div>
+</div>
+<!-- Social / Alternative Login -->
+<div class="mt-8 flex items-center justify-center gap-6">
+<span class="h-[1px] flex-1 bg-gradient-to-r from-transparent to-outline-variant/30"></span>
+<p class="font-etiqueta-sm text-etiqueta-sm text-on-surface-variant/40 uppercase tracking-widest">O entrar con</p>
+<span class="h-[1px] flex-1 bg-gradient-to-l from-transparent to-outline-variant/30"></span>
+</div>
+<div class="mt-6 flex justify-center gap-4">
+<button class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center border border-outline-variant/20 hover:border-primary/50 transition-all group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">google</span>
+</button>
+<button class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center border border-outline-variant/20 hover:border-primary/50 transition-all group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">social_leaderboard</span>
+</button>
+<button class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center border border-outline-variant/20 hover:border-primary/50 transition-all group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">gamepad</span>
+</button>
+</div>
+</main>
+<script>
+        function toggleAuth(type) {
+            const loginTab = document.getElementById('tab-login');
+            const registerTab = document.getElementById('tab-register');
+            const loginForm = document.getElementById('form-login');
+            const registerForm = document.getElementById('form-register');
+
+            if (type === 'login') {
+                loginTab.classList.add('active-tab', 'text-primary');
+                loginTab.classList.remove('text-on-surface-variant');
+                registerTab.classList.remove('active-tab', 'text-primary');
+                registerTab.classList.add('text-on-surface-variant');
+                
+                loginForm.classList.remove('hidden');
+                loginForm.classList.add('block');
+                registerForm.classList.add('hidden');
+                registerForm.classList.remove('block');
+            } else {
+                registerTab.classList.add('active-tab', 'text-primary');
+                registerTab.classList.remove('text-on-surface-variant');
+                loginTab.classList.remove('active-tab', 'text-primary');
+                loginTab.classList.add('text-on-surface-variant');
+
+                registerForm.classList.remove('hidden');
+                registerForm.classList.add('block');
+                loginForm.classList.add('hidden');
+                loginForm.classList.remove('block');
+            }
+        }
+
+        // Particle generation for atmosphere
+        const container = document.getElementById('particles-container');
+        const particleCount = 20;
+
+        for (let i = 0; i < particleCount; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.animationDelay = Math.random() * 10 + 's';
+            p.style.opacity = Math.random() * 0.3;
+            container.appendChild(p);
+        }
+
+        // Intercept form submission for visual feedback
+        document.querySelectorAll('form').forEach(form => {
+            form.onsubmit = (e) => {
+                e.preventDefault();
+                const btn = form.querySelector('button');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<span class="animate-spin material-symbols-outlined">progress_activity</span>';
+                btn.disabled = true;
+                
+                setTimeout(() => {
+                    btn.innerHTML = '¡Acceso Concedido!';
+                    btn.classList.replace('bg-primary', 'bg-tertiary-container');
+                    btn.classList.replace('text-on-primary', 'text-on-tertiary-container');
+                }, 1500);
+            };
+        });
+    </script>
+</body></html>
