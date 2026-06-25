@@ -114,7 +114,8 @@ form.addEventListener("submit", async (e) => {
         const ingredientesData = item.recipe.map(ing => ({
           id: ing.id,
           name: ing.name,
-          quantity: ing.quantity
+          quantity: ing.quantity,
+          image: ing.image || ing.img || ""
         }));
         if (ingredientesList) {
           ingredientesList.dataset.ingredientes = JSON.stringify(ingredientesData);

@@ -46,4 +46,17 @@ export function asignarEventosCalculo() {
       calcularGanancia();
     });
   });
+
+  // También escuchar cambios en cantidad a fabricar y precio del objeto
+  const cantidadFabricarInput = document.getElementById("cantidadFabricar");
+  if (cantidadFabricarInput) {
+    cantidadFabricarInput.removeEventListener("input", calcularGanancia);
+    cantidadFabricarInput.addEventListener("input", calcularGanancia);
+  }
+
+  const precioObjetoInput = document.getElementById("precioObjeto");
+  if (precioObjetoInput) {
+    precioObjetoInput.removeEventListener("input", calcularGanancia);
+    precioObjetoInput.addEventListener("input", calcularGanancia);
+  }
 }
